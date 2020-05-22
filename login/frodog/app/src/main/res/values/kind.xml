@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="kind">
+        <item>종류를 선택하세요</item>
+        <item>불독</item>
+        <item>시바</item>
+        <item>골든리트리버</item>
+
+
+
+    </string-array>
+
+
+
+</resources>

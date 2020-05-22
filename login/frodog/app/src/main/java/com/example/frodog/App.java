@@ -84,5 +84,3 @@ public class App extends Application {
         instance = null;
     }
 }
-
-

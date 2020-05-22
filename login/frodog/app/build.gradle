@@ -17,6 +17,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    splits {
+
+        abi {
+
+            enable true
+
+            reset()
+
+            include 'x86', 'x86_64', 'armeabi-v7a', 'armeabi'
+
+            universalApk false
+
+        }
+
+    }
+
 }
 
 dependencies {
@@ -29,4 +45,5 @@ dependencies {
     implementation 'com.kakao.sdk:usermgmt:1.27.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation files('libs/libDaumMapAndroid.jar')
 }
