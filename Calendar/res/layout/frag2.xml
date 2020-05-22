@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+
+            android:dateTextAppearance="@style/CalendarViewDateCustomText"
+            android:weekDayTextAppearance="@style/CalendarViewWeekCustomText"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/whenDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calendarView"
+            android:gravity="center_horizontal"
+            android:textColor="?attr/textcolor"
+            android:text="date"
+            android:textSize="24dp"/>
+
+        <TextView
+            android:id="@+id/scheduleText"
+            android:layout_below="@+id/whenDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/textcolor"
+            android:textSize="18dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="추가된 일정이 없습니다" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler1"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/scheduleText" />
+
+
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
