@@ -1,0 +1,2 @@
+include ':app', ':kakao-android-sdk-rx-2.0.0-beta04'
+rootProject.name='frodog'
