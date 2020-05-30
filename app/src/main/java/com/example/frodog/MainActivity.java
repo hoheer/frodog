@@ -130,21 +130,7 @@ public class MainActivity extends Activity {
 
 
         //저장후 엑티비티
-        //버튼을 생성하여서 입력받은 정보들을 다음 액티비티로 넘기는 작업
-        Button save=findViewById(R.id.Save_Button);
-        save.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(),Check.class);//넘어가는 액티비티의 class
-                intent.putExtra("name", Nickname);
-                intent.putExtra("Email",Email);
-                intent.putExtra("birthday",editText.getText().toString());
-                intent.putExtra("kind",spinner.getSelectedItem().toString()); //유저가 선택한 아이템을 불러와서 string으로 변환하여 넘김
-                //intent.putExtra("sex",rd.getText().toString());
-               // intent.putExtra("sex",checked(v));
-                startActivity(intent);
-            }
-        });
+
 
 
 
