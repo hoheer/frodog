@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
     DatePickerDialog datePicker;
     EditText editText;
     Adapter sAdapter;
-
+        //testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
