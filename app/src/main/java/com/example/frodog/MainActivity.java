@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
 
 
        //강아지 종류 선택 spinner 사용
+        //강아지 종류 values/kind.xml에 위치
        final Spinner spinner=(Spinner)findViewById(R.id.Dog_check); //spinner 를사용하여 목록을 불러오고 선택하는 방식
         sAdapter = ArrayAdapter.createFromResource(this,R.array.kind,android.R.layout.simple_spinner_dropdown_item);//spinner의 밑으로 스크로를 내리를 레이아웃을 가져와서 목록을 띄우게함
         spinner.setAdapter((SpinnerAdapter) sAdapter);
