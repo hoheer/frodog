@@ -31,7 +31,7 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import java.util.Calendar;
 
 public class Pro extends Activity {
-    
+
     String Nickname;
     String Email;
     DatePickerDialog datePicker;
@@ -132,12 +132,11 @@ public class Pro extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(getApplicationContext(),Check.class);//넘어가는 액티비티의 class
-               // intent.putExtra("name", Nickname);
-                //intent.putExtra("Email",Email);
+                intent.putExtra("name", Nickname);
+                intent.putExtra("Email",Email);
                 intent.putExtra("birthday",editText.getText().toString());
                 intent.putExtra("kind",spinner.getSelectedItem().toString()); //유저가 선택한 아이템을 불러와서 string으로 변환하여 넘김
-                //intent.putExtra("sex",rd.getText().toString());
-                intent.putExtra("sex",checked(v));
+                 intent.putExtra("sex",checked(v));
                 startActivity(intent);
                 finish();
 
