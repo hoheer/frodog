@@ -31,7 +31,7 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import java.util.Calendar;
 
 public class Pro extends Activity {
-
+    //6.5
     String Nickname;
     String Email;
     DatePickerDialog datePicker;
