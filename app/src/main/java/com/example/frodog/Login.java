@@ -26,7 +26,7 @@ import java.security.MessageDigest;
 
 @SuppressWarnings("ALL")
 public class Login extends AppCompatActivity {
-            //업데이트 확인용 주석  -sy
+
     private void getAppKeyHash() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);

@@ -45,9 +45,11 @@ public class Pro extends Activity {
         setContentView(R.layout.activity_pro);
         Intent intent = getIntent();
         TextView nickname = findViewById(R.id.Sign_Nickname);
-        Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
+       // Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
+        Nickname=intent.getExtras().getString("Name");
         nickname.setText(Nickname);
-        Email =intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
+       // Email =intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
+        Email=intent.getExtras().getString("Email");
         TextView email =findViewById(R.id.Sign_Email);
         email.setText(Email);
 

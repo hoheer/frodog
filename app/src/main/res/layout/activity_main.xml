@@ -24,6 +24,14 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/Button_Profile"
         android:text="Miss" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calender "
+        android:layout_toRightOf="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/Button_Calender"
+        />
 
 
 
