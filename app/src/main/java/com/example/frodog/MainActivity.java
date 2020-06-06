@@ -55,7 +55,6 @@ public class MainActivity extends Activity {
                 intent.putExtra("Name",Nickname);
                 intent.putExtra("Email",Email);
                 startActivity(intent);
-                finish();
             }
         });
         //캘린더 이동 버튼
@@ -65,7 +64,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,Calender.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
