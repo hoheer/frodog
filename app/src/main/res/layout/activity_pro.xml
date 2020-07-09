@@ -135,6 +135,13 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/Button_Map"
         android:text="Button" />
+    <Button
+        android:id="@+id/testbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:layout_toRightOf="@+id/Save_Button"
+        android:layout_alignParentBottom="true"/>
 <CheckBox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -152,6 +159,14 @@
         android:layout_below="@+id/Dog_Birthday_Text"
         android:layout_toRightOf="@+id/boy"/>
 
+    <ImageView
+        android:id="@+id/testview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/girl"
+
+        android:layout_marginTop="-1dp"
+        android:src="@mipmap/ic_launcher_round" />
 
 
 </RelativeLayout>

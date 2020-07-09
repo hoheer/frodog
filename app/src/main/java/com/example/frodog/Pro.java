@@ -1,14 +1,25 @@
 package com.example.frodog;
 
 
-
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.InputType;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -17,10 +28,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.ApiErrorCode;
@@ -28,10 +47,14 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Pro extends Activity {
-
+    ImageView test1;
     String Nickname;
     String Email;
     DatePickerDialog datePicker;
@@ -39,30 +62,40 @@ public class Pro extends Activity {
     Adapter sAdapter;
 
 
+    private static final int MY_PERMISSION_CAMERA = 1;
+    private static final int REQUEST_TAKE_PHOTO = 2;
+    private static final int REQUEST_TAKE_ALBUM = 3;
+    private static final int REQUEST_IMAGE_CROP = 4;
+    String mCurrentPhotoPath;
+    private Uri imageUri;
+    private Uri PhotoURI, albumURI;
+    Boolean ablum =false;
+
+   // public  static  final  int REQUESTCODE =101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro);
         Intent intent = getIntent();
         TextView nickname = findViewById(R.id.Sign_Nickname);
-       // Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
-        Nickname=intent.getExtras().getString("Name");
+        // Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
+        Nickname = intent.getExtras().getString("Name");
         nickname.setText(Nickname);
-       // Email =intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
-        Email=intent.getExtras().getString("Email");
-        TextView email =findViewById(R.id.Sign_Email);
+        // Email =intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
+        Email = intent.getExtras().getString("Email");
+        TextView email = findViewById(R.id.Sign_Email);
         email.setText(Email);
 
-        Button Logout =findViewById(R.id.logout); //로그아웃
-        Button Sign_out=findViewById(R.id.Button_Sign_Out); // 회원탈퇴
-        Button Map=findViewById(R.id.Button_Map);//지도
-
+        Button Logout = findViewById(R.id.logout); //로그아웃
+        Button Sign_out = findViewById(R.id.Button_Sign_Out); // 회원탈퇴
+        Button Map = findViewById(R.id.Button_Map);//지도
 
 
         //강아지 종류 선택 spinner 사용
         //강아지 종류 values/kind.xml에 위치
-        final Spinner spinner=(Spinner)findViewById(R.id.Dog_check); //spinner 를사용하여 목록을 불러오고 선택하는 방식
-        sAdapter = ArrayAdapter.createFromResource(this,R.array.kind,android.R.layout.simple_spinner_dropdown_item);//spinner의 밑으로 스크로를 내리를 레이아웃을 가져와서 목록을 띄우게함
+        final Spinner spinner = (Spinner) findViewById(R.id.Dog_check); //spinner 를사용하여 목록을 불러오고 선택하는 방식
+        sAdapter = ArrayAdapter.createFromResource(this, R.array.kind, android.R.layout.simple_spinner_dropdown_item);//spinner의 밑으로 스크로를 내리를 레이아웃을 가져와서 목록을 띄우게함
         spinner.setAdapter((SpinnerAdapter) sAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             //아이템을 선택했을때 추가적인 행동 밑에 주석은 선택시 아이템에 대한 toast 메세지를 생성
@@ -70,9 +103,6 @@ public class Pro extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Toast.makeText(Pro.this,
                 //       (CharSequence) sAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-
-
-
 
 
             }
@@ -85,25 +115,24 @@ public class Pro extends Activity {
 
 
         //생일 선택
-        editText=(EditText)findViewById(R.id.Dog_Birthday_Text); //날짜를 입력받는 edittext를 불러옴
+        editText = (EditText) findViewById(R.id.Dog_Birthday_Text); //날짜를 입력받는 edittext를 불러옴
         editText.setInputType(InputType.TYPE_NULL); //초기 입력값은 Null로 설정
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar cal =Calendar.getInstance();    //클릭 리스너를 이용해, 캘런더를 불러오고 거기에서 년,월,일을 가져온다
-                int year= cal.get(Calendar.YEAR);
-                int month= cal.get(Calendar.MONTH);
+                final Calendar cal = Calendar.getInstance();    //클릭 리스너를 이용해, 캘런더를 불러오고 거기에서 년,월,일을 가져온다
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 //datapickdialog를 불러와서 입력을 받고 그것을 보여주게 한다.
-                datePicker=new DatePickerDialog(Pro.this
+                datePicker = new DatePickerDialog(Pro.this
                         , new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        editText.setText(year+"년" + (monthOfYear + 1) + "월" +dayOfMonth + "일" );
+                        editText.setText(year + "년" + (monthOfYear + 1) + "월" + dayOfMonth + "일");
                     }
-                },year,month,day); //선택시 년 월 일로 표시후 그걸 입력
+                }, year, month, day); //선택시 년 월 일로 표시후 그걸 입력
                 datePicker.show();
-
 
 
             }
@@ -124,27 +153,60 @@ public class Pro extends Activity {
         });
 
 
-
-
         //저장후 엑티비티
 
         //버튼을 생성하여서 입력받은 정보들을 다음 액티비티로 넘기는 작업
-        Button save=findViewById(R.id.Save_Button);
+        Button save = findViewById(R.id.Save_Button);
         save.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(),Check.class);//넘어가는 액티비티의 class
+                Intent intent = new Intent(getApplicationContext(), Check.class);//넘어가는 액티비티의 class
                 intent.putExtra("name", Nickname);
-                intent.putExtra("Email",Email);
-                intent.putExtra("birthday",editText.getText().toString());
-                intent.putExtra("kind",spinner.getSelectedItem().toString()); //유저가 선택한 아이템을 불러와서 string으로 변환하여 넘김
-                 intent.putExtra("sex",checked(v));
+                intent.putExtra("Email", Email);
+                intent.putExtra("birthday", editText.getText().toString());
+                intent.putExtra("kind", spinner.getSelectedItem().toString()); //유저가 선택한 아이템을 불러와서 string으로 변환하여 넘김
+                intent.putExtra("sex", checked(v));
                 startActivity(intent);
                 finish();
 
             }
         });
+        //프로필 사진
+        //카메라
 
+
+        //테스트 구현
+        test1=findViewById(R.id.testview);
+        test1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(getApplicationContext(),v);
+                getMenuInflater().inflate(R.menu.main_menu, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.camera:
+                                captureCamera();
+                                break;
+                            case  R.id.gallery:
+                                getAlbum();
+                                break;
+                            case R.id.none:
+                                test1.setImageResource(R.mipmap.ic_launcher_round);
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+                checkPermission();
+            }
+
+
+
+
+        });
 
 
 
@@ -153,30 +215,28 @@ public class Pro extends Activity {
         Map.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Pro.this,Map.class);
+                Intent intent = new Intent(Pro.this, Map.class);
                 startActivity(intent);
             }
         });
-
 
 
         //로그아웃
         Logout.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"정상적으로 로그아웃되었습니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "정상적으로 로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
 
                 UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
                     @Override
                     public void onCompleteLogout() {
-                        Intent intent= new Intent(Pro.this, Login.class);
+                        Intent intent = new Intent(Pro.this, Login.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 });
             }
         });
-
 
 
         //회원탈퇴
@@ -192,34 +252,37 @@ public class Pro extends Activity {
                                     //로그인 세션이 닫혀있어 못들어갈 시
                                     @Override
                                     public void onSessionClosed(ErrorResult errorResult) {
-                                        Toast.makeText(getApplicationContext(),"로그인 세션이 닫혔습니다.",Toast.LENGTH_SHORT).show();
-                                        Intent intent =new Intent(Pro.this,Login.class);
+                                        Toast.makeText(getApplicationContext(), "로그인 세션이 닫혔습니다.", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Pro.this, Login.class);
                                         startActivity(intent);
                                         finish();
                                     }
+
                                     // 카카오에 가입이 되어 있지 않을시
                                     @Override
-                                    public void onNotSignedUp(){
+                                    public void onNotSignedUp() {
                                         Toast.makeText(getApplicationContext(), "가입되지 않은 계정입니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(Pro.this, Login.class);
                                         startActivity(intent);
                                         finish();
                                     }
+
                                     // 회원 탈퇴 실패시
                                     @Override
-                                    public void onFailure(ErrorResult errorResult){
+                                    public void onFailure(ErrorResult errorResult) {
 
-                                        int result =errorResult.getErrorCode();
+                                        int result = errorResult.getErrorCode();
 
                                         if (result == ApiErrorCode.CLIENT_ERROR_CODE) {
-                                            Toast.makeText(getApplicationContext(),"네트워크 여결이 원활하지 않습니다. 다시 시도해 주세요",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "네트워크 여결이 원활하지 않습니다. 다시 시도해 주세요", Toast.LENGTH_SHORT).show();
 
 
-                                        }else {
-                                            Toast.makeText(getApplicationContext(),"회원탈퇴에 실패하셨습니다 다시 시도해주세요",Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "회원탈퇴에 실패하셨습니다 다시 시도해주세요", Toast.LENGTH_SHORT).show();
 
                                         }
                                     }
+
                                     //정상적으로 회원탈퇴가 되었을 시
                                     @Override
                                     public void onSuccess(Long result) {
@@ -230,11 +293,6 @@ public class Pro extends Activity {
                                     }
                                 });
                                 dialog.dismiss();
-
-
-
-
-
 
 
                             }
@@ -249,26 +307,214 @@ public class Pro extends Activity {
         });
 
 
+    }
+    private void getPictureForPhoto(){
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+        ExifInterface exifInterface= null;
+        try {
+            exifInterface = new ExifInterface(mCurrentPhotoPath);
+        }catch (IOException e){
+            e.toString();
+        }
+        int exifOrientation;
+        int exifDefree;
+
+        if(exifInterface !=null){
+            exifOrientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            exifDefree = exifOrientationToDegrees(exifOrientation);
 
 
+        }else{
+            exifDefree = 0;
+        }
+    }
+    private int exifOrientationToDegrees(int exifOrientation){
+        if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90){
+            return 90;
+        }else  if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180){
+            return 180;
+        }else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270){
+            return 270;
+        }
+        return 0;
+    }
+private Bitmap rotate(Bitmap src,float defree){
+    Matrix matrix=new Matrix();
+    matrix.postRotate(defree);
+    return Bitmap.createBitmap(src,0,0,src.getWidth(),src.getHeight(),matrix,true);
+}
+
+    private void captureCamera() {
+        String state= Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)){
+            Intent takepic =new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takepic.resolveActivity(getPackageManager()) != null){
+                File photofile = null;
+                try{
+                    photofile = createImageFile();
+                }catch (IOException e){
+                    Log.e("campureCamera is Error",e.toString());
+                }
+                if (photofile != null) {
+                    Uri puri = FileProvider.getUriForFile(this, getPackageName(), photofile);
+                    imageUri = puri;
+
+                    takepic.putExtra(MediaStore.EXTRA_OUTPUT, puri);
+                    startActivityForResult(takepic, REQUEST_TAKE_PHOTO);
+                }
+                } else {
+                    Toast.makeText(this,"접근이 불가능합니다.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+    }
+    private  File createImageFile() throws IOException{
+        String timeS =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filename ="JPEG_" + timeS + ".jpg";
+        File imagefile =null;
+        File storageDir =new File(Environment.getExternalStorageDirectory() + "/Pictures","test");
+
+        if (!storageDir.exists()){
+            storageDir.mkdirs();
+        }
+        imagefile =new File(storageDir, filename);
+        mCurrentPhotoPath =imagefile.getAbsolutePath();
+
+        return  imagefile;
+    }
+    private void getAlbum() {
+        Intent getintent = new Intent(Intent.ACTION_PICK);
+        getintent.setType("image/*");
+        getintent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(getintent, REQUEST_TAKE_ALBUM);
+    }
+    private  void galleyAddPic(){
+        Intent m=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File file=new File(mCurrentPhotoPath);
+        Uri curi=Uri.fromFile(file);
+        m.setData(curi);
+        sendBroadcast(m);
+        Toast.makeText(this, "앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show();;
+    }
+    public  void cropImage(){
+        Intent c=new Intent("com.android.camera.action.CROP");
+        c.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        c.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        c.setDataAndType(PhotoURI,"image/*");
+        c.putExtra("aspectX",1);
+        c.putExtra("aspectY",1);
+        c.putExtra("outputX",100);
+        c.putExtra("outputY",100);
+        c.putExtra("scale",true);
+        c.putExtra("output",albumURI);
+        startActivityForResult(c,REQUEST_IMAGE_CROP);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data){
+      //  super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode){
+            case REQUEST_TAKE_PHOTO:
+                if(resultCode == Activity.RESULT_OK){
+                    try {
+                        Log.i("REQUSET_TAKE_PHOTO","OK");
+                        galleyAddPic();
+
+                        test1.setImageURI(imageUri);
+                    }catch (Exception e){
+                        Log.e("REQUSET_TAKE_PHOTO",e.toString());
+                    }
+                }else {
+                    Toast.makeText(Pro.this,"저장공간에 접근할수 없는 기기 입니다.",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case  REQUEST_TAKE_ALBUM:
+                if (resultCode == Activity.RESULT_OK){
+                    if (data.getData() != null){
+                        try {
+                            File ablumFile = null;
+                            ablumFile =createImageFile();
+                            PhotoURI= data.getData();
+                            albumURI=Uri.fromFile(ablumFile);
+                            cropImage();
+                        } catch (IOException e) {
+                            Log.e("TAKE_ALBUM_",e.toString());
+
+                        }
+                    }
+                }
+                break;
+            case REQUEST_IMAGE_CROP:
+                if (resultCode == Activity.RESULT_OK){
+                    galleyAddPic();
+                    test1.setImageURI(albumURI);
+                }
+                break;
+        }
+    }
+    private void checkPermission() {
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            if((ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE))||
+                    (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA))){
+                new AlertDialog.Builder(this).setTitle("알림").setMessage("저장소 권한이 거부되었습니다.").setNeutralButton("설정", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        intent.setData(Uri.parse("package: " + getPackageName()));
+                        startActivity(intent);
+                    }
+                }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                }).setCancelable(false).create().show();
+            }else{
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, MY_PERMISSION_CAMERA);
+            }
+        }
+    }
+    //카메라 권한
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+
+        if (requestCode == 0) {
+            if (grantResults[0] == 0) {
+                Toast.makeText(this, "카메라 권한 승인완료", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(this, "카메라 권한 승인 거절", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 //체크박스 검사
 
-    public String checked(View v){
+    public String checked(View v) {
         // TODO Auto-generated method stub
 
         CheckBox b1 = findViewById(R.id.boy);
         CheckBox b2 = findViewById(R.id.girl);
-        String t1="";
-        if(b1.isChecked()){
-            t1="수컷";
+        String t1 = "";
+        if (b1.isChecked()) {
+            t1 = "수컷";
             b2.setChecked(false);
         }
-        if(b2.isChecked()){
-            t1="암컷";
+        if (b2.isChecked()) {
+            t1 = "암컷";
             b1.setChecked(false);
         }
         return t1;
     }
+
+
+
+
+
+
+
+
+
+
 }
