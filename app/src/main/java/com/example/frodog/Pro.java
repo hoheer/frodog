@@ -1,25 +1,17 @@
 package com.example.frodog;
 
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.Settings;
 import android.text.InputType;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -29,17 +21,12 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
+import androidx.annotation.RequiresApi;
 
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.ApiErrorCode;
@@ -49,29 +36,20 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Pro extends Activity {
-    ImageView test1;
+    ImageView profile_image;
     String Nickname;
     String Email;
     DatePickerDialog datePicker;
     EditText editText;
     Adapter sAdapter;
 
-
-    private static final int MY_PERMISSION_CAMERA = 1;
-    private static final int REQUEST_TAKE_PHOTO = 2;
-    private static final int REQUEST_TAKE_ALBUM = 3;
-    private static final int REQUEST_IMAGE_CROP = 4;
-    String mCurrentPhotoPath;
-    private Uri imageUri;
-    private Uri PhotoURI, albumURI;
-    Boolean ablum =false;
-
-   // public  static  final  int REQUESTCODE =101;
+    private static final int REQUEST_TAKE_ALBUM = 1111;
+    private static final int REQUEST_IMAGE_CROP = 2222;
+    private String mCurrentPhotoPath;
+    private  Uri PhotoURI, albumURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,40 +150,15 @@ public class Pro extends Activity {
             }
         });
         //프로필 사진
-        //카메라
 
-
-        //테스트 구현
-        test1=findViewById(R.id.testview);
-        test1.setOnClickListener(new View.OnClickListener() {
+        profile_image=findViewById(R.id.Profile_image);
+        profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(getApplicationContext(),v);
-                getMenuInflater().inflate(R.menu.main_menu, popupMenu.getMenu());
+                getAlbum();
 
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()){
-                            case R.id.camera:
-                                captureCamera();
-                                break;
-                            case  R.id.gallery:
-                                getAlbum();
-                                break;
-                            case R.id.none:
-                                test1.setImageResource(R.mipmap.ic_launcher_round);
-                        }
-                        return true;
-                    }
-                });
-                popupMenu.show();
-                checkPermission();
+
             }
-
-
-
-
         });
 
 
@@ -308,71 +261,13 @@ public class Pro extends Activity {
 
 
     }
-    private void getPictureForPhoto(){
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-        ExifInterface exifInterface= null;
-        try {
-            exifInterface = new ExifInterface(mCurrentPhotoPath);
-        }catch (IOException e){
-            e.toString();
-        }
-        int exifOrientation;
-        int exifDefree;
 
-        if(exifInterface !=null){
-            exifOrientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            exifDefree = exifOrientationToDegrees(exifOrientation);
-
-
-        }else{
-            exifDefree = 0;
-        }
-    }
-    private int exifOrientationToDegrees(int exifOrientation){
-        if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90){
-            return 90;
-        }else  if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180){
-            return 180;
-        }else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270){
-            return 270;
-        }
-        return 0;
-    }
-private Bitmap rotate(Bitmap src,float defree){
-    Matrix matrix=new Matrix();
-    matrix.postRotate(defree);
-    return Bitmap.createBitmap(src,0,0,src.getWidth(),src.getHeight(),matrix,true);
-}
-
-    private void captureCamera() {
-        String state= Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)){
-            Intent takepic =new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takepic.resolveActivity(getPackageManager()) != null){
-                File photofile = null;
-                try{
-                    photofile = createImageFile();
-                }catch (IOException e){
-                    Log.e("campureCamera is Error",e.toString());
-                }
-                if (photofile != null) {
-                    Uri puri = FileProvider.getUriForFile(this, getPackageName(), photofile);
-                    imageUri = puri;
-
-                    takepic.putExtra(MediaStore.EXTRA_OUTPUT, puri);
-                    startActivityForResult(takepic, REQUEST_TAKE_PHOTO);
-                }
-                } else {
-                    Toast.makeText(this,"접근이 불가능합니다.",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-    }
+//file 생성
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private  File createImageFile() throws IOException{
-        String timeS =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String filename ="JPEG_" + timeS + ".jpg";
+        String filename ="JPEG_" + ".jpg";
         File imagefile =null;
-        File storageDir =new File(Environment.getExternalStorageDirectory() + "/Pictures","test");
+        File storageDir =new File(Environment.getExternalStorageDirectory() + "/Pictures");
 
         if (!storageDir.exists()){
             storageDir.mkdirs();
@@ -382,20 +277,24 @@ private Bitmap rotate(Bitmap src,float defree){
 
         return  imagefile;
     }
+
+//앨범에서 불러오기
     private void getAlbum() {
         Intent getintent = new Intent(Intent.ACTION_PICK);
         getintent.setType("image/*");
         getintent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(getintent, REQUEST_TAKE_ALBUM);
     }
+    //앨범에 저장
     private  void galleyAddPic(){
         Intent m=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File file=new File(mCurrentPhotoPath);
-        Uri curi=Uri.fromFile(file);
+        File f=new File(mCurrentPhotoPath);
+        Uri curi=Uri.fromFile(f);
         m.setData(curi);
         sendBroadcast(m);
         Toast.makeText(this, "앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show();;
     }
+    // crop화
     public  void cropImage(){
         Intent c=new Intent("com.android.camera.action.CROP");
         c.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -403,32 +302,23 @@ private Bitmap rotate(Bitmap src,float defree){
         c.setDataAndType(PhotoURI,"image/*");
         c.putExtra("aspectX",1);
         c.putExtra("aspectY",1);
-        c.putExtra("outputX",100);
-        c.putExtra("outputY",100);
+        c.putExtra("outputX",1000);
+        c.putExtra("outputY",1000);
         c.putExtra("scale",true);
         c.putExtra("output",albumURI);
         startActivityForResult(c,REQUEST_IMAGE_CROP);
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data){
-      //  super.onActivityResult(requestCode,resultCode,data);
-        switch (requestCode){
-            case REQUEST_TAKE_PHOTO:
-                if(resultCode == Activity.RESULT_OK){
-                    try {
-                        Log.i("REQUSET_TAKE_PHOTO","OK");
-                        galleyAddPic();
+    protected void onActivityResult(int requestCode,int resultCode, Intent data){
+       super.onActivityResult(requestCode,resultCode,data);
+    if (resultCode != RESULT_OK){
+    return;
+        }
+        switch (requestCode) {
 
-                        test1.setImageURI(imageUri);
-                    }catch (Exception e){
-                        Log.e("REQUSET_TAKE_PHOTO",e.toString());
-                    }
-                }else {
-                    Toast.makeText(Pro.this,"저장공간에 접근할수 없는 기기 입니다.",Toast.LENGTH_SHORT).show();
-                }
-                break;
             case  REQUEST_TAKE_ALBUM:
                 if (resultCode == Activity.RESULT_OK){
                     if (data.getData() != null){
@@ -448,11 +338,13 @@ private Bitmap rotate(Bitmap src,float defree){
             case REQUEST_IMAGE_CROP:
                 if (resultCode == Activity.RESULT_OK){
                     galleyAddPic();
-                    test1.setImageURI(albumURI);
+                    profile_image.setImageURI(PhotoURI);
                 }
                 break;
         }
+
     }
+    /*
     private void checkPermission() {
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
             if((ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE))||
@@ -477,18 +369,22 @@ private Bitmap rotate(Bitmap src,float defree){
     }
     //카메라 권한
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSION_CAMERA:
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] < 0) {
+                        Toast.makeText(Pro.this, "해당 권한을 활성화 하셔야 합니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
 
-        if (requestCode == 0) {
-            if (grantResults[0] == 0) {
-                Toast.makeText(this, "카메라 권한 승인완료", Toast.LENGTH_SHORT).show();
 
-            } else {
-                Toast.makeText(this, "카메라 권한 승인 거절", Toast.LENGTH_SHORT).show();
-            }
+                break;
         }
     }
+
+     */
 //체크박스 검사
 
     public String checked(View v) {
