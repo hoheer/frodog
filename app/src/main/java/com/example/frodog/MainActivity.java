@@ -66,5 +66,25 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+//팝업창 테스트
+        new AlertDialog.Builder(this) // TestActivity 부분에는 현재 Activity의 이름 입력.
+                .setMessage("AlertDialog 테스트")     // 제목 부분 (직접 작성)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
+                    public void onClick(DialogInterface dialog, int which) {
+                        //  Toast.makeText(getApplicationContext(), "확인 누름", Toast.LENGTH_SHORT).show(); // 실행할 코드
+                        Intent pro =new Intent(MainActivity.this,Pro.class);
+                        pro.putExtra("Name",Nickname);
+                        pro.putExtra("Email",Email);
+                        startActivity(pro);
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {     // 버튼2 (직접 작성)
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getApplicationContext(), "취소 누름", Toast.LENGTH_SHORT).show(); // 실행할 코드
+
+                    }
+                })
+                .show();
     }
 }

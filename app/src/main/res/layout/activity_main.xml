@@ -7,32 +7,47 @@
     tools:context=".MainActivity">
 
 
+    <LinearLayout
+        android:id="@+id/L3"
+        android:layout_width="match_parent"
+        android:layout_height="267dp"
+        android:layout_below="@+id/L2"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/Button_Calender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calender " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/L1"
+        android:layout_width="match_parent"
+        android:layout_height="239dp"
+        android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/Button_Profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:text="Profile" />
+        <Button
+            android:id="@+id/Button_Profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/Button_Profile"
-        android:text="Miss" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calender "
-        android:layout_toRightOf="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/Button_Calender"
-        />
+    <LinearLayout
+        android:id="@+id/L2"
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        android:layout_below="@+id/L1"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miss" />
+    </LinearLayout>
 
 
 </RelativeLayout>
