@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -36,9 +38,10 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Pro extends Activity {
+public class Pro extends Activity implements View.OnClickListener {
     ImageView profile_image;
     String Nickname;
     String Email;
@@ -51,23 +54,57 @@ public class Pro extends Activity {
     private String mCurrentPhotoPath;
     private  Uri PhotoURI, albumURI;
 
+
+    //데이터베이스 함수
+    Button Save;
+    EditText pet_name;
+
+    long nowIndex;
+    String ID;
+    String name;
+    String kind;
+    String gender = "";
+    String sort = "userid";
+    ArrayAdapter<String> arrayAdapter;
+
+    static ArrayList<String> arrayIndex =  new ArrayList<String>();
+    static ArrayList<String> arrayData = new ArrayList<String>();
+    private DbOpenHelper mDbOpenHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro);
         Intent intent = getIntent();
-        TextView nickname = findViewById(R.id.Sign_Nickname);
+       // TextView nickname = findViewById(R.id.Sign_Nickname);
         // Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
-        Nickname = intent.getExtras().getString("Name");
-        nickname.setText(Nickname);
+       // Nickname = intent.getExtras().getString("Name");
+       // nickname.setText(Nickname);
         // Email =intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
-        Email = intent.getExtras().getString("Email");
-        TextView email = findViewById(R.id.Sign_Email);
-        email.setText(Email);
+      //  Email = intent.getExtras().getString("Email");
+       // TextView email = findViewById(R.id.Sign_Email);
+       // email.setText(Email);
 
-        Button Logout = findViewById(R.id.logout); //로그아웃
-        Button Sign_out = findViewById(R.id.Button_Sign_Out); // 회원탈퇴
-        Button Map = findViewById(R.id.Button_Map);//지도
+      //  Button Logout = findViewById(R.id.logout); //로그아웃
+      //  Button Sign_out = findViewById(R.id.Button_Sign_Out); // 회원탈퇴
+      //  Button Map = findViewById(R.id.Button_Map);//지도
+
+        Save=findViewById(R.id.Save_Button);
+        Save.setOnClickListener(this);
+
+        pet_name=findViewById(R.id.Pet_name);
+        pet_name.setOnClickListener(this);
+
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        ListView listView = (ListView) findViewById(R.id.db_list_view);
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(onClickListener);
+        listView.setOnItemLongClickListener(longClickListener);
+
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+
 
 
         //강아지 종류 선택 spinner 사용
@@ -115,7 +152,7 @@ public class Pro extends Activity {
 
             }
         });
-
+/*
         //체크 박스 선택으로 강아지의 성별을 체크 하는 방식
         findViewById(R.id.boy).setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -131,8 +168,10 @@ public class Pro extends Activity {
         });
 
 
-        //저장후 엑티비티
+ */
 
+        //저장후 엑티비티
+/*
         //버튼을 생성하여서 입력받은 정보들을 다음 액티비티로 넘기는 작업
         Button save = findViewById(R.id.Save_Button);
         save.setOnClickListener(new Button.OnClickListener() {
@@ -149,9 +188,11 @@ public class Pro extends Activity {
 
             }
         });
-        //프로필 사진
 
-        profile_image=findViewById(R.id.Profile_image);
+ */
+        //프로필 사진
+/*
+        profile_image=findViewById(R.id.Dog_image);
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +204,8 @@ public class Pro extends Activity {
 
 
 
+ */
+/*
         //지도로 넘어가는 버튼
         //지도는 에뮬로 돌렸을시 작동이 안댐 폰으로 구동시만 작동함.
         Map.setOnClickListener(new Button.OnClickListener() {
@@ -260,8 +303,109 @@ public class Pro extends Activity {
         });
 
 
+
+ */
+    }
+    private AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.e("On Click", "position = " + position);
+            nowIndex = Long.parseLong(arrayIndex.get(position));
+            Log.e("On Click", "nowIndex = " + nowIndex);
+            Log.e("On Click", "Data: " + arrayData.get(position));
+            String[] tempData = arrayData.get(position).split("\\s+");
+            Log.e("On Click", "Split Result = " + tempData);
+            pet_name.setText(tempData[0].trim());
+            pet_name.setText(tempData[1].trim());
+            pet_name.setText(tempData[2].trim());
+            pet_name.setText(tempData[3].trim());
+           /* if(tempData[3].trim().equals("Man")){
+                check_Man.setChecked(true);
+                gender = "Man";
+            }else{
+                check_Woman.setChecked(true);
+                gender = "Woman";
+            }
+
+            */
+            Save.setEnabled(false);
+
+        }
+    };
+    public void setInsertMode(){
+        Save.setText("");
+        pet_name.setText("");
+        pet_name.setText("");
+      //  check_Man.setChecked(false);
+      //  check_Woman.setChecked(false);
+        Save.setEnabled(true);
+       // btn_Update.setEnabled(false);
+    }
+    private AdapterView.OnItemLongClickListener longClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.d("Long Click", "position = " + position);
+            nowIndex = Long.parseLong(arrayIndex.get(position));
+            String[] nowData = arrayData.get(position).split("\\s+");
+            String viewData = nowData[0] + ", " + nowData[1] + ", " + nowData[2] + ", " + nowData[3];
+            AlertDialog.Builder dialog = new AlertDialog.Builder(Pro.this);
+            dialog.setTitle("데이터 삭제")
+                    .setMessage("해당 데이터를 삭제 하시겠습니까?" + "\n" + viewData)
+                    .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(Pro.this, "데이터를 삭제했습니다.", Toast.LENGTH_SHORT).show();
+                            mDbOpenHelper.deleteColumn(nowIndex);
+                            showDatabase(sort);
+                            setInsertMode();
+                        }
+                    })
+                    .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(Pro.this, "삭제를 취소했습니다.", Toast.LENGTH_SHORT).show();
+                            setInsertMode();
+                        }
+                    })
+                    .create()
+                    .show();
+            return false;
+        }
+    };
+    public void showDatabase(String sort){
+        Cursor iCursor = mDbOpenHelper.sortColumn(sort);
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        arrayData.clear();
+        arrayIndex.clear();
+        while(iCursor.moveToNext()){
+            String tempIndex = iCursor.getString(iCursor.getColumnIndex("_id"));
+            String tempID = iCursor.getString(iCursor.getColumnIndex("userid"));
+            tempID = setTextLength(tempID,10);
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+            tempName = setTextLength(tempName,10);
+            String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
+            tempAge = setTextLength(tempAge,10);
+            String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
+            tempGender = setTextLength(tempGender,10);
+
+            String Result = tempID + tempName + tempAge + tempGender;
+            arrayData.add(Result);
+            arrayIndex.add(tempIndex);
+        }
+        arrayAdapter.clear();
+        arrayAdapter.addAll(arrayData);
+        arrayAdapter.notifyDataSetChanged();
     }
 
+    public String setTextLength(String text, int length){
+        if(text.length()<length){
+            int gap = length - text.length();
+            for (int i=0; i<gap; i++){
+                text = text + " ";
+            }
+        }
+        return text;
+    }
 //file 생성
     @RequiresApi(api = Build.VERSION_CODES.N)
     private  File createImageFile() throws IOException{
@@ -386,7 +530,7 @@ public class Pro extends Activity {
 
      */
 //체크박스 검사
-
+/*
     public String checked(View v) {
         // TODO Auto-generated method stub
 
@@ -405,12 +549,25 @@ public class Pro extends Activity {
     }
 
 
+ */
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.Save_Button:
+                ID=pet_name.getText().toString();
+                name=pet_name.getText().toString();
+                kind=pet_name.getText().toString();
+                gender=pet_name.getText().toString();
+                mDbOpenHelper.open();
+                mDbOpenHelper.insertColumn(ID, name, kind, gender);
+                showDatabase(sort);
+                setInsertMode();
+                pet_name.requestFocus();
+                pet_name.setCursorVisible(true);
+        }
 
-
-
-
-
+    }
 
 
 }

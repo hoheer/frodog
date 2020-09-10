@@ -7,96 +7,68 @@
     tools:context=".Pro">
 
 
-    <TextView
-        android:id="@+id/Signtext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edge"
-        android:gravity="center_horizontal|left|center_vertical"
-        android:text="회원가입"
-        android:textSize="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        app:layout_constraintVertical_bias="0.0" />
+    <ImageView
+        android:id="@+id/Dog_image"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_below="@+id/Pet_name"
+        />
 
     <TextView
         android:id="@+id/Sign_Nicname_Textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Signtext"
-        android:text="닉네임:"
+        android:layout_below="@+id/Dog_check"
+        android:text="이름:"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/Sign_Nickname"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/Pet_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="..."
-        android:textSize="20sp"
-        android:layout_below="@+id/Sign_Nicname_Textview">
+        android:layout_below="@+id/Sign_Nicname_Textview"
+        android:textSize="20sp">
 
-    </TextView>
+    </EditText>
 
 
 
 
     <TextView
-        android:id="@+id/Sign_Email_Textview"
+        android:id="@+id/Sign_Sex_Textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="이메일:"
+        android:text="성별"
         android:textSize="20sp"
-        android:layout_below="@+id/Sign_Nickname"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/Sign_Email"
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="...."
-        android:layout_below="@+id/Sign_Email_Textview"
-        />
+        android:text="수컷"
+        android:textSize="20dp"
+        android:id="@+id/boy"
+        android:layout_below="@+id/Sign_Sex_Textview"/>
 
-    <Button
-        android:id="@+id/Button_Sign_Out"
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원탈퇴"
-        android:layout_below="@+id/Sign_Email"
-        android:layout_toRightOf="@+id/logout"
-        />
-
-    <Button
-        android:id="@+id/logout"
+        android:textSize="20dp"
+        android:text="암컷"
+        android:id="@+id/girl"
+        android:layout_below="@+id/Sign_Sex_Textview"
+        android:layout_toRightOf="@+id/boy"/>
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="로그아웃"
-        android:layout_below="@+id/Sign_Email"
+        android:textSize="20dp"
+        android:text="중성"
+        android:id="@+id/nothing"
+        android:layout_below="@+id/Sign_Sex_Textview"
+        android:layout_toRightOf="@+id/girl"
         />
-
-    <TextView
-        android:id="@+id/Kindofdog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="어떤 품종 인가요?"
-        android:textSize="25dp"
-        android:layout_below="@+id/logout"
-        android:layout_centerVertical="true"
-        />
-
-    <Spinner
-        android:id="@+id/Dog_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:layout_below="@+id/Kindofdog"
-        />
-
 
 
 
@@ -106,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="강아지의 생일"
         android:textSize="30dp"
-        android:layout_below="@+id/Dog_check"
+        android:layout_below="@+id/nothing"
 
         />
 
@@ -120,53 +92,55 @@
         android:ems="10"
         android:hint="생년월일을 입력하십시오"/>
 
-    <Button
-        android:id="@+id/Button_Map"
+    <TextView
+        android:id="@+id/Kindofdog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:text="Map" />
+        android:text="품종"
+        android:textSize="25dp"
+        android:layout_below="@+id/Dog_Birthday_Text"
+        android:layout_centerVertical="true"
+        />
+
+    <Spinner
+        android:id="@+id/Dog_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/Kindofdog"
+        />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="272dp"
+        android:layout_below="@+id/Dog_image"
+        android:layout_marginTop="5dp"
+        android:fillViewport="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <ListView
+            android:id="@+id/db_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/Save_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/Button_Map"
-        android:text="Button" />
-    <Button
-        android:id="@+id/testbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"
-        android:layout_toRightOf="@+id/Save_Button"
-        android:layout_alignParentBottom="true"/>
-<CheckBox
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="수컷"
-    android:textSize="20dp"
-    android:id="@+id/boy"
-    android:layout_below="@+id/Dog_Birthday_Text"/>
+        android:text="저장하기"
+        android:layout_centerHorizontal="true"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="암컷"
-        android:id="@+id/girl"
-        android:layout_below="@+id/Dog_Birthday_Text"
-        android:layout_toRightOf="@+id/boy"/>
 
-    <ImageView
-        android:id="@+id/Profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/girl"
-        android:layout_above="@+id/Button_Map"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher_round" />
+
+
 
 
 </RelativeLayout>

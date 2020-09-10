@@ -97,7 +97,7 @@ public class Login extends AppCompatActivity {
                 public void onSuccess(MeV2Response result) {
                     Intent intent =new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("name",result.getNickname());
-                   // intent.putExtra("profile",result.getProfileImagePath());
+                    intent.putExtra("profile",result.getProfileImagePath());
                     String needScopeAutority ="";
                     if (result.getKakaoAccount().needsScopeAccountEmail()){
                         needScopeAutority =needScopeAutority +"이메일";
