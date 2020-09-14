@@ -96,7 +96,7 @@ public class Pro extends Activity implements View.OnClickListener {
         pet_name.setOnClickListener(this);
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        ListView listView = (ListView) findViewById(R.id.db_list_view);
+        ListView listView =findViewById(R.id.db_list_view);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(onClickListener);
         listView.setOnItemLongClickListener(longClickListener);
@@ -105,7 +105,14 @@ public class Pro extends Activity implements View.OnClickListener {
         mDbOpenHelper.open();
         mDbOpenHelper.create();
 
-
+        Button t3=findViewById(R.id.test34);
+        t3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Pro.this,Check.class);
+                startActivity(intent);
+            }
+        });
 
         //강아지 종류 선택 spinner 사용
         //강아지 종류 values/kind.xml에 위치
@@ -191,7 +198,7 @@ public class Pro extends Activity implements View.OnClickListener {
 
  */
         //프로필 사진
-/*
+
         profile_image=findViewById(R.id.Dog_image);
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +211,6 @@ public class Pro extends Activity implements View.OnClickListener {
 
 
 
- */
 /*
         //지도로 넘어가는 버튼
         //지도는 에뮬로 돌렸을시 작동이 안댐 폰으로 구동시만 작동함.
@@ -560,11 +566,15 @@ public class Pro extends Activity implements View.OnClickListener {
                 kind=pet_name.getText().toString();
                 gender=pet_name.getText().toString();
                 mDbOpenHelper.open();
-                mDbOpenHelper.insertColumn(ID, name, kind, gender);
+               mDbOpenHelper.insertColumn(ID, name, kind, gender);
+              // mDbOpenHelper.deleteAllColumns();
                 showDatabase(sort);
                 setInsertMode();
                 pet_name.requestFocus();
                 pet_name.setCursorVisible(true);
+                mDbOpenHelper.close();
+                Intent intent =new Intent(Pro.this,Check.class);
+                startActivity(intent);
         }
 
     }

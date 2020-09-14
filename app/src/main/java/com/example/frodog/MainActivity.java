@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
         profile.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,Pro.class
+                Intent intent =new Intent(MainActivity.this,Mypage.class
                 );
                 intent.putExtra("Name",Nickname);
                 intent.putExtra("Email",Email);
@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
                     public void onClick(DialogInterface dialog, int which) {
                         //  Toast.makeText(getApplicationContext(), "확인 누름", Toast.LENGTH_SHORT).show(); // 실행할 코드
-                        Intent pro =new Intent(MainActivity.this,Pro.class);
+                        Intent pro =new Intent(MainActivity.this,Mypage.class);
                         pro.putExtra("Name",Nickname);
                         pro.putExtra("Email",Email);
                         startActivity(pro);

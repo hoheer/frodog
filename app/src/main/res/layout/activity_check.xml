@@ -6,57 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".Check">
 
-    <TextView
-        android:id="@+id/User_Name"
-        android:text="..."
-        android:textSize="20dp"
-        android:layout_width="212dp"
-        android:layout_height="145dp"
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="397dp"
+        android:layout_height="615dp"
+        android:fillViewport="true"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
-    <TextView
-        android:id="@+id/User_Email"
-        android:layout_width="216dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="8dp"
-        android:text="..."
-        android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/User_Name"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        <ListView
+            android:id="@+id/db_list_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/Dog_Kind"
-        android:layout_width="210dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="8dp"
-        android:text="..."
-        android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/User_Email"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        </ListView>
 
-    <TextView
-        android:id="@+id/Dog_birthday"
-        android:layout_width="214dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="16dp"
-        android:text="..."
-        android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/Dog_Kind"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="18dp" />
+    </ScrollView>
 
-    <TextView
-        android:id="@+id/Dog_sex_check"
-        android:layout_width="367dp"
-        android:layout_height="227dp"
-        android:layout_marginTop="16dp"
-        android:text="..."
-        android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/Dog_birthday"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="3dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

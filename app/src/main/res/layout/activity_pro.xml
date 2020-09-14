@@ -137,6 +137,13 @@
         android:layout_alignParentBottom="true"
         android:text="저장하기"
         android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/test34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/Save_Button"
+        android:layout_alignParentBottom="true"
+        android:text="test3"/>
 
 
 

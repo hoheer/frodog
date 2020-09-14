@@ -40,13 +40,7 @@
             android:layout_width="210dp"
             android:layout_height="100dp"
            />
-        <TextView
-            android:id="@+id/t2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="..."
 
-            android:textSize="30dp"/>
     </LinearLayout>
 
     <LinearLayout
