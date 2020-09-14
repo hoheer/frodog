@@ -51,6 +51,7 @@ public class Pro extends Activity implements View.OnClickListener {
     CheckBox boy;
     CheckBox girl;
     CheckBox nothing;
+    String kind1;
     private static final int REQUEST_TAKE_ALBUM = 1111;
     private static final int REQUEST_IMAGE_CROP = 2222;
     private String mCurrentPhotoPath;
@@ -106,6 +107,8 @@ public class Pro extends Activity implements View.OnClickListener {
         nothing=findViewById(R.id.nothing);
         nothing.setOnClickListener(this);
 
+
+
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView =findViewById(R.id.db_list_view);
         listView.setAdapter(arrayAdapter);
@@ -127,6 +130,8 @@ public class Pro extends Activity implements View.OnClickListener {
             //아이템을 선택했을때 추가적인 행동 밑에 주석은 선택시 아이템에 대한 toast 메세지를 생성
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                kind1=spinner.getSelectedItem().toString();
+
                 // Toast.makeText(Pro.this,
                 //       (CharSequence) sAdapter.getItem(position), Toast.LENGTH_SHORT).show();
 
@@ -163,23 +168,7 @@ public class Pro extends Activity implements View.OnClickListener {
 
             }
         });
-/*
-        //체크 박스 선택으로 강아지의 성별을 체크 하는 방식
-        findViewById(R.id.boy).setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked(v);
-            }
-        });
-        findViewById(R.id.girl).setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked(v);
-            }
-        });
 
-
- */
 
         //저장후 엑티비티
 /*
@@ -350,7 +339,7 @@ public class Pro extends Activity implements View.OnClickListener {
     public void setInsertMode(){
         Save.setText("");
         pet_name.setText("");
-        pet_name.setText("");
+        editText.setText("");
         boy.setChecked(false);
         girl.setChecked(false);
         nothing.setChecked(false);
@@ -396,13 +385,13 @@ public class Pro extends Activity implements View.OnClickListener {
         while(iCursor.moveToNext()){
             String tempIndex = iCursor.getString(iCursor.getColumnIndex("_id"));
             String tempID = iCursor.getString(iCursor.getColumnIndex("userid"));
-            tempID = setTextLength(tempID,10);
+            tempID = setTextLength(tempID,100);
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
-            tempName = setTextLength(tempName,10);
+            tempName = setTextLength(tempName,100);
             String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
-            tempAge = setTextLength(tempAge,10);
+            tempAge = setTextLength(tempAge,100);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
-            tempGender = setTextLength(tempGender,10);
+            tempGender = setTextLength(tempGender,100);
 
             String Result = tempID + tempName + tempAge + tempGender;
             arrayData.add(Result);
@@ -572,8 +561,8 @@ public class Pro extends Activity implements View.OnClickListener {
         switch (v.getId()){
             case R.id.Save_Button:
                 ID=pet_name.getText().toString();
-                name=pet_name.getText().toString();
-                kind=pet_name.getText().toString();
+                name=kind1;
+                kind=editText.getText().toString();
                // gender=pet_name.getText().toString();
                 mDbOpenHelper.open();
                mDbOpenHelper.insertColumn(ID, name, kind, gender);
