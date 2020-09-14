@@ -48,7 +48,9 @@ public class Pro extends Activity implements View.OnClickListener {
     DatePickerDialog datePicker;
     EditText editText;
     Adapter sAdapter;
-
+    CheckBox boy;
+    CheckBox girl;
+    CheckBox nothing;
     private static final int REQUEST_TAKE_ALBUM = 1111;
     private static final int REQUEST_IMAGE_CROP = 2222;
     private String mCurrentPhotoPath;
@@ -95,6 +97,15 @@ public class Pro extends Activity implements View.OnClickListener {
         pet_name=findViewById(R.id.Pet_name);
         pet_name.setOnClickListener(this);
 
+        girl =findViewById(R.id.girl);
+        girl.setOnClickListener(this);
+
+        boy= findViewById(R.id.boy);
+        boy.setOnClickListener(this);
+
+        nothing=findViewById(R.id.nothing);
+        nothing.setOnClickListener(this);
+
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView =findViewById(R.id.db_list_view);
         listView.setAdapter(arrayAdapter);
@@ -105,14 +116,7 @@ public class Pro extends Activity implements View.OnClickListener {
         mDbOpenHelper.open();
         mDbOpenHelper.create();
 
-        Button t3=findViewById(R.id.test34);
-        t3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(Pro.this,Check.class);
-                startActivity(intent);
-            }
-        });
+
 
         //강아지 종류 선택 spinner 사용
         //강아지 종류 values/kind.xml에 위치
@@ -324,16 +328,21 @@ public class Pro extends Activity implements View.OnClickListener {
             pet_name.setText(tempData[0].trim());
             pet_name.setText(tempData[1].trim());
             pet_name.setText(tempData[2].trim());
-            pet_name.setText(tempData[3].trim());
-           /* if(tempData[3].trim().equals("Man")){
-                check_Man.setChecked(true);
-                gender = "Man";
-            }else{
-                check_Woman.setChecked(true);
-                gender = "Woman";
+            //pet_name.setText(tempData[3].trim());
+            if(tempData[3].trim().equals("수컷")){
+                boy.setChecked(true);
+                gender = "수컷";
+            }
+            else if(tempData[3].trim().equals("중성")){
+                nothing.setChecked(true);
+                gender="중성";
+            }
+            else{
+                girl.setChecked(true);
+                gender = "암컷";
             }
 
-            */
+
             Save.setEnabled(false);
 
         }
@@ -342,8 +351,9 @@ public class Pro extends Activity implements View.OnClickListener {
         Save.setText("");
         pet_name.setText("");
         pet_name.setText("");
-      //  check_Man.setChecked(false);
-      //  check_Woman.setChecked(false);
+        boy.setChecked(false);
+        girl.setChecked(false);
+        nothing.setChecked(false);
         Save.setEnabled(true);
        // btn_Update.setEnabled(false);
     }
@@ -564,7 +574,7 @@ public class Pro extends Activity implements View.OnClickListener {
                 ID=pet_name.getText().toString();
                 name=pet_name.getText().toString();
                 kind=pet_name.getText().toString();
-                gender=pet_name.getText().toString();
+               // gender=pet_name.getText().toString();
                 mDbOpenHelper.open();
                mDbOpenHelper.insertColumn(ID, name, kind, gender);
               // mDbOpenHelper.deleteAllColumns();
@@ -575,6 +585,26 @@ public class Pro extends Activity implements View.OnClickListener {
                 mDbOpenHelper.close();
                 Intent intent =new Intent(Pro.this,Check.class);
                 startActivity(intent);
+                break;
+
+
+            case R.id.boy:
+                girl.setChecked(false);
+                nothing.setChecked(false);
+                gender = "수컷";
+                break;
+
+            case R.id.girl:
+                boy.setChecked(false);
+                nothing.setChecked(false);
+                gender = "암컷";
+                break;
+            case R.id.nothing:
+                boy.setChecked(false);
+                girl.setChecked(false);
+                gender="중성";
+                break;
+
         }
 
     }

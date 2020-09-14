@@ -45,12 +45,13 @@
         tools:ignore="MissingConstraints" />
 
     <CheckBox
+        android:id="@+id/boy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Sign_Sex_Textview"
+        android:layout_marginTop="0dp"
         android:text="수컷"
-        android:textSize="20dp"
-        android:id="@+id/boy"
-        android:layout_below="@+id/Sign_Sex_Textview"/>
+        android:textSize="20dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -137,13 +138,6 @@
         android:layout_alignParentBottom="true"
         android:text="저장하기"
         android:layout_centerHorizontal="true"/>
-    <Button
-        android:id="@+id/test34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/Save_Button"
-        android:layout_alignParentBottom="true"
-        android:text="test3"/>
 
 
 
