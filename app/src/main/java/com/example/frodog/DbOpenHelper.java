@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbOpenHelper {
 
-    private static final String DATABASE_NAME = "InnerDatabase(SQLite).db";
+    private static final String DATABASE_NAME = "PetDB.db";
     private static final int DATABASE_VERSION = 1;
     public static SQLiteDatabase mDB;
     private DatabaseHelper mDBHelper;
@@ -55,17 +55,18 @@ public class DbOpenHelper {
     }
 
     // Insert DB
-    public long insertColumn(String userid, String name, String age , String gender){
+    public long insertColumn(String userid, String name, String age  ,String gender){
         ContentValues values = new ContentValues();
         values.put(PetBD.CreateDB.USERID, userid);
         values.put(PetBD.CreateDB.NAME, name);
         values.put(PetBD.CreateDB.AGE, age);
         values.put(PetBD.CreateDB.GENDER, gender);
+
         return mDB.insert(PetBD.CreateDB._TABLENAME0, null, values);
     }
 
     // Update DB
-    public boolean updateColumn(long id, String userid, String name, String age , String gender){
+    public boolean updateColumn(long id, String userid, String name ,String age , String gender){
         ContentValues values = new ContentValues();
         values.put(PetBD.CreateDB.USERID, userid);
         values.put(PetBD.CreateDB.NAME, name);

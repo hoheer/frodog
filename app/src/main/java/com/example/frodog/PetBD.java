@@ -2,6 +2,8 @@ package com.example.frodog;
 
 import android.provider.BaseColumns;
 
+import java.sql.Blob;
+
 public final class PetBD {
     public static final class CreateDB implements BaseColumns {
         public static final String USERID = "userid";

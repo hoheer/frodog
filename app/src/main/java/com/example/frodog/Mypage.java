@@ -46,7 +46,7 @@ public class Mypage extends AppCompatActivity {
         mypet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Mypage.this,Pro.class);
+                Intent intent =new Intent(Mypage.this,Check.class);
                 startActivity(intent);
                 finish();
             }
@@ -57,7 +57,7 @@ public class Mypage extends AppCompatActivity {
         choice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Mypage.this,Check.class);
+                Intent intent =new Intent(Mypage.this,Pro.class);
                 startActivity(intent);
                 finish();
             }

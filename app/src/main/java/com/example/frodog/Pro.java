@@ -7,6 +7,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +54,8 @@ public class Pro extends Activity implements View.OnClickListener {
     CheckBox girl;
     CheckBox nothing;
     String kind1;
+
+    private  int REQUSET_TEST =10000;
     private static final int REQUEST_TAKE_ALBUM = 1111;
     private static final int REQUEST_IMAGE_CROP = 2222;
     private String mCurrentPhotoPath;
@@ -68,6 +72,7 @@ public class Pro extends Activity implements View.OnClickListener {
     String kind;
     String gender = "";
     String sort = "userid";
+    String uri;
     ArrayAdapter<String> arrayAdapter;
 
     static ArrayList<String> arrayIndex =  new ArrayList<String>();
@@ -490,7 +495,9 @@ public class Pro extends Activity implements View.OnClickListener {
                     profile_image.setImageURI(PhotoURI);
                 }
                 break;
+
         }
+
 
     }
     /*
@@ -534,27 +541,7 @@ public class Pro extends Activity implements View.OnClickListener {
     }
 
      */
-//체크박스 검사
-/*
-    public String checked(View v) {
-        // TODO Auto-generated method stub
 
-        CheckBox b1 = findViewById(R.id.boy);
-        CheckBox b2 = findViewById(R.id.girl);
-        String t1 = "";
-        if (b1.isChecked()) {
-            t1 = "수컷";
-            b2.setChecked(false);
-        }
-        if (b2.isChecked()) {
-            t1 = "암컷";
-            b1.setChecked(false);
-        }
-        return t1;
-    }
-
-
- */
 
     @Override
     public void onClick(View v) {
@@ -563,9 +550,11 @@ public class Pro extends Activity implements View.OnClickListener {
                 ID=pet_name.getText().toString();
                 name=kind1;
                 kind=editText.getText().toString();
+               //kind=profile_image.toString();
+
                // gender=pet_name.getText().toString();
                 mDbOpenHelper.open();
-               mDbOpenHelper.insertColumn(ID, name, kind, gender);
+               mDbOpenHelper.insertColumn(ID, name, kind,gender);
               // mDbOpenHelper.deleteAllColumns();
                 showDatabase(sort);
                 setInsertMode();
