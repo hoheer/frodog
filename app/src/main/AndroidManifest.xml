@@ -26,6 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".EditDog"></activity>
         <activity android:name=".Mypage" />
         <activity android:name=".Calender" />
@@ -45,7 +46,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".Calender" />
         <activity
             android:name=".addschedule"
             android:label="일정 추가" />
@@ -63,9 +63,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".Calender"
-            tools:ignore="DuplicateActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

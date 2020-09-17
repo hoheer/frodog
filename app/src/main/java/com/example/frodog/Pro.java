@@ -7,8 +7,6 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,16 +25,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.ApiErrorCode;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
-import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import java.io.File;
 import java.io.IOException;
@@ -586,6 +577,5 @@ public class Pro extends Activity implements View.OnClickListener {
         }
 
     }
-
-
+    
 }
