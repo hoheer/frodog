@@ -70,6 +70,7 @@ public class Check extends Activity {
         public void onClick(View v) {
             Intent intent=new Intent(Check.this,Pro.class);
             startActivity(intent);
+            finish();
         }
     });
 
@@ -89,13 +90,15 @@ public class Check extends Activity {
 
 
         Intent intent =new Intent(Check.this,EditDog.class);
-        intent.putExtra("position",position);
+
         intent.putExtra("name",tempData[0].trim());
-      //  intent.putExtra("p2",tempData[1].trim());
+        intent.putExtra("p2",tempData[1].trim());
         intent.putExtra("p3",tempData[2].trim());
         intent.putExtra("p4",tempData[3].trim());
         intent.putExtra("nowindex",nowIndex);
+            //intent.putExtra("position",position);
         startActivity(intent);
+        finish();
         }
     };
     private AdapterView.OnItemLongClickListener longClickListener = new AdapterView.OnItemLongClickListener() {
@@ -137,13 +140,13 @@ public class Check extends Activity {
         while(iCursor.moveToNext()){
             String tempIndex = iCursor.getString(iCursor.getColumnIndex("_id"));
             String tempID = iCursor.getString(iCursor.getColumnIndex("userid"));
-            tempID = setTextLength(tempID,50);
+            tempID = setTextLength(tempID,10);
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
-            tempName = setTextLength(tempName,50);
+            tempName = setTextLength(tempName,10);
             String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
-            tempAge = setTextLength(tempAge,50);
+            tempAge = setTextLength(tempAge,10);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
-            tempGender = setTextLength(tempGender,50);
+            tempGender = setTextLength(tempGender,10);
 
             String Result = tempID + tempName + tempAge + tempGender;
             arrayData.add(Result);

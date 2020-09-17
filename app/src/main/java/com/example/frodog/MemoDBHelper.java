@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
-
+// 테이플 이름 Calender_table로 변경
 public class MemoDBHelper extends SQLiteOpenHelper
 {
     private static MemoDBHelper sInstance; // 싱글턴 인스턴스 선언

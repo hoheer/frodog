@@ -22,9 +22,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -39,14 +36,14 @@ public class Pro extends Activity implements View.OnClickListener {
     String Nickname;
     String Email;
     DatePickerDialog datePicker;
-    EditText editText;
+    EditText editText ;
     Adapter sAdapter;
     CheckBox boy;
     CheckBox girl;
     CheckBox nothing;
     String kind1;
 
-    private  int REQUSET_TEST =10000;
+
     private static final int REQUEST_TAKE_ALBUM = 1111;
     private static final int REQUEST_IMAGE_CROP = 2222;
     private String mCurrentPhotoPath;
@@ -55,7 +52,7 @@ public class Pro extends Activity implements View.OnClickListener {
 
     //데이터베이스 함수
     Button Save;
-    EditText pet_name;
+    EditText pet_name ,kind_of_dog;
 
     long nowIndex;
     String ID;
@@ -87,29 +84,32 @@ public class Pro extends Activity implements View.OnClickListener {
       //  Button Logout = findViewById(R.id.logout); //로그아웃
       //  Button Sign_out = findViewById(R.id.Button_Sign_Out); // 회원탈퇴
       //  Button Map = findViewById(R.id.Button_Map);//지도
-
+        //저장
         Save=findViewById(R.id.Save_Button);
         Save.setOnClickListener(this);
-
+        //품종
+        kind_of_dog=findViewById(R.id.Dog_check);
+        kind_of_dog.setOnClickListener(this);
+        //이름
         pet_name=findViewById(R.id.Pet_name);
         pet_name.setOnClickListener(this);
-
+        //체크박스
         girl =findViewById(R.id.girl);
         girl.setOnClickListener(this);
-
+    //체크박스
         boy= findViewById(R.id.boy);
         boy.setOnClickListener(this);
-
+    //체크박스
         nothing=findViewById(R.id.nothing);
         nothing.setOnClickListener(this);
 
 
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        ListView listView =findViewById(R.id.db_list_view);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(onClickListener);
-        listView.setOnItemLongClickListener(longClickListener);
+       // ListView listView =findViewById(R.id.db_list_view);
+       // listView.setAdapter(arrayAdapter);
+      //  listView.setOnItemClickListener(onClickListener);
+       // listView.setOnItemLongClickListener(longClickListener);
 
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
@@ -119,7 +119,7 @@ public class Pro extends Activity implements View.OnClickListener {
 
         //강아지 종류 선택 spinner 사용
         //강아지 종류 values/kind.xml에 위치
-        final Spinner spinner = (Spinner) findViewById(R.id.Dog_check); //spinner 를사용하여 목록을 불러오고 선택하는 방식
+       /* final Spinner spinner = (Spinner) findViewById(R.id.Dog_check); //spinner 를사용하여 목록을 불러오고 선택하는 방식
         sAdapter = ArrayAdapter.createFromResource(this, R.array.kind, android.R.layout.simple_spinner_dropdown_item);//spinner의 밑으로 스크로를 내리를 레이아웃을 가져와서 목록을 띄우게함
         spinner.setAdapter((SpinnerAdapter) sAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -140,6 +140,8 @@ public class Pro extends Activity implements View.OnClickListener {
             }
         });
 
+
+        */
 
         //생일 선택
         editText = (EditText) findViewById(R.id.Dog_Birthday_Text); //날짜를 입력받는 edittext를 불러옴
@@ -336,6 +338,7 @@ public class Pro extends Activity implements View.OnClickListener {
         Save.setText("");
         pet_name.setText("");
         editText.setText("");
+        kind_of_dog.setText("");
         boy.setChecked(false);
         girl.setChecked(false);
         nothing.setChecked(false);
@@ -381,13 +384,13 @@ public class Pro extends Activity implements View.OnClickListener {
         while(iCursor.moveToNext()){
             String tempIndex = iCursor.getString(iCursor.getColumnIndex("_id"));
             String tempID = iCursor.getString(iCursor.getColumnIndex("userid"));
-            tempID = setTextLength(tempID,100);
+            tempID = setTextLength(tempID,10);
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
-            tempName = setTextLength(tempName,100);
+            tempName = setTextLength(tempName,10);
             String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
-            tempAge = setTextLength(tempAge,100);
+            tempAge = setTextLength(tempAge,10);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
-            tempGender = setTextLength(tempGender,100);
+            tempGender = setTextLength(tempGender,10);
 
             String Result = tempID + tempName + tempAge + tempGender;
             arrayData.add(Result);
@@ -539,21 +542,22 @@ public class Pro extends Activity implements View.OnClickListener {
         switch (v.getId()){
             case R.id.Save_Button:
                 ID=pet_name.getText().toString();
-                name=kind1;
+                name=kind_of_dog.getText().toString();
                 kind=editText.getText().toString();
                //kind=profile_image.toString();
 
                // gender=pet_name.getText().toString();
                 mDbOpenHelper.open();
-               mDbOpenHelper.insertColumn(ID, name, kind,gender);
-              // mDbOpenHelper.deleteAllColumns();
-                showDatabase(sort);
-                setInsertMode();
+              // mDbOpenHelper.insertColumn(ID, name, kind,gender);
+               mDbOpenHelper.deleteAllColumns();
+              //  showDatabase(sort);
+               // setInsertMode();
                 pet_name.requestFocus();
                 pet_name.setCursorVisible(true);
                 mDbOpenHelper.close();
                 Intent intent =new Intent(Pro.this,Check.class);
                 startActivity(intent);
+                finish();
                 break;
 
 
@@ -577,5 +581,5 @@ public class Pro extends Activity implements View.OnClickListener {
         }
 
     }
-    
+
 }

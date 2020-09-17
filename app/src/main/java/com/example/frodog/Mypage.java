@@ -22,7 +22,7 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 public class Mypage extends AppCompatActivity {
 
     String Nickname,Email,sProfile;
-
+    ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +37,9 @@ public class Mypage extends AppCompatActivity {
         TextView email =findViewById(R.id.Sign_Email);
         email.setText(Email);
 
-        ImageView image =findViewById(R.id.Profile_Image1); // 카카오 api를 통해 사용자의 프로필 사진을 가져옴
-        sProfile=intent.getExtras().getString("Profile");
-        Glide.with(this).load(sProfile).into(image);
+        image =findViewById(R.id.Profile_Image1); // 카카오 api를 통해 사용자의 프로필 사진을 가져옴
+        sProfile=intent.getExtras().getString("profile");
+        Glide.with(this).load(sProfile).circleCrop().into(image);
 
         Button mypet=findViewById(R.id.My_Pet_Page_Button); //반려견 설정
 
@@ -48,7 +48,7 @@ public class Mypage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent =new Intent(Mypage.this,Check.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
@@ -59,7 +59,7 @@ public class Mypage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent =new Intent(Mypage.this,Pro.class);
                 startActivity(intent);
-                finish();
+
             }
         });
         Button Logout =findViewById(R.id.logout); //로그아웃

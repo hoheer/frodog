@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
                 );
                 intent.putExtra("Name", Nickname);
                 intent.putExtra("Email", Email);
+                intent.putExtra("profile",sProfile);
                 startActivity(intent);
             }
         });

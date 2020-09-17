@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbOpenHelper {
-
+// 테이플 MyPet_table으로 변경
     private static final String DATABASE_NAME = "PetDB.db";
     private static final int DATABASE_VERSION = 1;
     public static SQLiteDatabase mDB;

@@ -1,27 +1,27 @@
 package com.example.frodog;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
 
 public class EditDog extends AppCompatActivity implements View.OnClickListener {
-    private EditText birtday,pet_name;
-    private Spinner kind;
+    private EditText birtday,pet_name, kind ,editText;
+    DatePickerDialog datePicker;
     private CheckBox boy,girl,noting;
     private Button edit;
     private DbOpenHelper mDbOpenHelper;
     private String ID,name,kind1;
-    String gender="";
+    String gender=" ";
     int position;
     Long nowIndex;
     @Override
@@ -33,15 +33,36 @@ public class EditDog extends AppCompatActivity implements View.OnClickListener {
         birtday=findViewById(R.id.Dog_Birthday_Text_1);
         pet_name=findViewById(R.id.Pet_name_1);
         kind=findViewById(R.id.Dog_check_1);
-        boy=findViewById(R.id.boy);
-        girl=findViewById(R.id.girl);
-        noting=findViewById(R.id.nothing);
+        boy=findViewById(R.id.boy_1);
+        girl=findViewById(R.id.girl_1);
+        noting=findViewById(R.id.nothing_1);
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
         mDbOpenHelper.create();
         Intent intent=getIntent();
 
+        editText = (EditText) findViewById(R.id.Dog_Birthday_Text_1); //날짜를 입력받는 edittext를 불러옴
+        editText.setInputType(InputType.TYPE_NULL); //초기 입력값은 Null로 설정
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cal = Calendar.getInstance();    //클릭 리스너를 이용해, 캘런더를 불러오고 거기에서 년,월,일을 가져온다
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                //datapickdialog를 불러와서 입력을 받고 그것을 보여주게 한다.
+                datePicker = new DatePickerDialog(EditDog.this
+                        , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        editText.setText(year + "년" + (monthOfYear + 1) + "월" + dayOfMonth + "일");
+                    }
+                }, year, month, day); //선택시 년 월 일로 표시후 그걸 입력
+                datePicker.show();
 
+
+            }
+        });
 
 
         String t1 =intent.getExtras().getString("name");
@@ -64,6 +85,10 @@ public class EditDog extends AppCompatActivity implements View.OnClickListener {
 
         position=intent.getExtras().getInt("position");
 
+        pet_name.setText(t1);
+        birtday.setText(t3);
+        kind.setText(t2);
+
 
         if(t4.equals("수컷")){
             boy.setChecked(true);
@@ -76,8 +101,7 @@ public class EditDog extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-        pet_name.setText(t1);
-        birtday.setText(t3);
+
 
 
 
@@ -92,27 +116,31 @@ public class EditDog extends AppCompatActivity implements View.OnClickListener {
             case R.id.Edit_Button:
 
                 ID=pet_name.getText().toString();
-                name=birtday.getText().toString();
+                name=kind.getText().toString();
+                kind1=birtday.getText().toString();
                 //  kind1=kind.getSelectedItem().toString();
-                kind1= "고양이";
                 mDbOpenHelper.updateColumn(nowIndex,ID,name,kind1,gender);
                 pet_name.requestFocus();
                 pet_name.setCursorVisible(true);
                 Intent intent =new Intent(EditDog.this,Check.class);
+                mDbOpenHelper.close();
                 startActivity(intent);
+                finish();
             break;
-            case R.id.boy:
+
+
+            case R.id.boy_1:
                 girl.setChecked(false);
                 noting.setChecked(false);
                 gender = "수컷";
                 break;
 
-            case R.id.girl:
+            case R.id.girl_1:
                 boy.setChecked(false);
                 noting.setChecked(false);
                 gender = "암컷";
                 break;
-            case R.id.nothing:
+            case R.id.nothing_1:
                 boy.setChecked(false);
                 girl.setChecked(false);
                 gender="중성";
