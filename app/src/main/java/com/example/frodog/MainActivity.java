@@ -1,32 +1,46 @@
 package com.example.frodog;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 
 @SuppressWarnings("ALL")
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     String Nickname;
     String Email;
     ImageView t1;
     String sProfile;
+    String image;
+    private DbOpenHelper mDbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Intent intent = getIntent();
         t1 = findViewById(R.id.test1);
         Nickname = intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
         Email = intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
         sProfile = intent.getStringExtra("profile");
+       // mDbOpenHelper = new DbOpenHelper(this);
+       // mDbOpenHelper.open();
+       // Cursor cursor= mDbOpenHelper.selectColumns();
+       //if(cursor != null){
+       // image=cursor.getString(4);
 
-        Glide.with(this).load(sProfile).into(t1);
+        Glide.with(this).load(image).into(t1);
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("메인 ");
+
 
         //프로필 이동버튼
         Button profile = findViewById(R.id.Button_Profile);
@@ -77,4 +91,6 @@ public class MainActivity extends Activity {
     }
 
 
-    }
+
+
+}

@@ -8,63 +8,62 @@
 
     <RelativeLayout
         android:id="@+id/linearLayout"
-        android:layout_width="407dp"
-        android:layout_height="167dp"
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="2dp">
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/Profile_Image1"
-            android:layout_width="100dp"
-            android:layout_height="90dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_marginTop="50dp" />
         이미지 -카카오톡
+
         <TextView
             android:id="@+id/Sign_Nicname_Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Profile_Image1"
-            android:text="안녕하세요!"
-            android:textSize="20sp"
             android:layout_marginLeft="111dp"
-            />
+            android:layout_marginTop="10dp"
+            android:text="안녕하세요!"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/Sign_Nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="..."
-            android:textSize="20sp"
             android:layout_below="@+id/Profile_Image1"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/Sign_Nicname_Textview"
-           >
+
+            android:text="..."
+            android:textSize="20sp">
 
         </TextView>
+
         <TextView
+            android:id="@+id/nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/nick"
-            android:text="님!"
-            android:textSize="20dp"
             android:layout_below="@+id/Profile_Image1"
-            android:layout_toRightOf="@+id/Sign_Nickname"/>
-
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/Sign_Nickname"
+            android:text="님!"
+            android:textSize="20dp" />
 
 
         <TextView
             android:id="@+id/Sign_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="...."
             android:layout_below="@+id/Sign_Nickname"
             android:layout_centerHorizontal="true"
-            android:textSize="20dp"
-            />
+
+            android:text="...."
+            android:textSize="20dp" />
 
         텍스트뷰 -카카오톡 이름
         이메일 -카카오톡 주소
@@ -72,64 +71,68 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="412dp"
-        android:layout_height="281dp"
+        android:layout_width="match_parent"
+        android:layout_height="217dp"
+        android:background="@drawable/mypet_second_layout_background"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-1dp">
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/My_Pet_Page_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 나의 반려 동물 "
-            android:textSize="30dp" />
+            android:layout_width="139dp"
+            android:layout_height="281dp"
+            android:layout_marginLeft="70dp"
+            android:background="@drawable/mypage_mypet" />
 
         <Button
             android:id="@+id/Pet_Choice_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="반려동물 추천"
-            android:textSize="30dp" />
+            android:layout_width="139dp"
+            android:layout_height="281dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/My_Pet_Page_Button"
+            android:background="@drawable/mypage_recommend" />
         나의 반려동물 -버튼
         반려동물 추천 -버튼
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="405dp"
-        android:layout_height="237dp"
-        android:layout_marginTop="22dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/my_pet_third_layout_background"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="2dp">
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/Button_Sign_Out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Sign_Email"
+            android:layout_width="146dp"
+            android:layout_height="77dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/logout"
-            android:text="회원탈퇴" />
+
+            android:background="@drawable/mypage_delete" />
 
         <Button
             android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="146dp"
+            android:layout_height="77dp"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/mypage_logout"
 
-            android:layout_below="@+id/Sign_Email"
-            android:text="로그아웃" />
+            />
 
         회원탈퇴 -버튼
         로그아웃 -버튼
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

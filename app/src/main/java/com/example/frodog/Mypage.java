@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +28,11 @@ public class Mypage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("마이페이지");
+
+
         Intent intent = getIntent();
         TextView nickname = findViewById(R.id.Sign_Nickname);
         // Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴

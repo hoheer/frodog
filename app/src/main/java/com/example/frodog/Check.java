@@ -2,7 +2,6 @@ package com.example.frodog;
 
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,10 +16,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 
-public class Check extends Activity {
+public class Check extends AppCompatActivity {
     String sort ="userid";
     EditText pet_name;
     long nowIndex;
@@ -33,6 +35,9 @@ public class Check extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("나의 반려 동물");
+
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView =findViewById(R.id.db_list_view_1);
         listView.setAdapter(arrayAdapter);
@@ -41,6 +46,7 @@ public class Check extends Activity {
         save=findViewById(R.id.save_check);
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open();
+        mDbOpenHelper.create();
         showDatabase(sort);
 /*
         TextView UserName = findViewById(R.id.User_Name);
@@ -95,6 +101,7 @@ public class Check extends Activity {
         intent.putExtra("p2",tempData[1].trim());
         intent.putExtra("p3",tempData[2].trim());
         intent.putExtra("p4",tempData[3].trim());
+//        intent.putExtra("p5",tempData[4].trim());
         intent.putExtra("nowindex",nowIndex);
             //intent.putExtra("position",position);
         startActivity(intent);
@@ -107,7 +114,7 @@ public class Check extends Activity {
             Log.d("Long Click", "position = " + position);
             nowIndex = Long.parseLong(arrayIndex.get(position));
             String[] nowData = arrayData.get(position).split("\\s+");
-            String viewData = nowData[0] + ", " + nowData[1] + ", " + nowData[2] + ", " + nowData[3];
+            String viewData = nowData[0] + ", " + nowData[1] + ", " + nowData[2] + ", " + nowData[3] ;
             AlertDialog.Builder dialog = new AlertDialog.Builder(Check.this);
             dialog.setTitle("데이터 삭제")
                     .setMessage("해당 데이터를 삭제 하시겠습니까?" + "\n" + viewData)
@@ -140,15 +147,14 @@ public class Check extends Activity {
         while(iCursor.moveToNext()){
             String tempIndex = iCursor.getString(iCursor.getColumnIndex("_id"));
             String tempID = iCursor.getString(iCursor.getColumnIndex("userid"));
-            tempID = setTextLength(tempID,10);
+            tempID = setTextLength(tempID,20);
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
-            tempName = setTextLength(tempName,10);
+            tempName = setTextLength(tempName,20);
             String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
-            tempAge = setTextLength(tempAge,10);
+            tempAge = setTextLength(tempAge,20);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
-            tempGender = setTextLength(tempGender,10);
-
-            String Result = tempID + tempName + tempAge + tempGender;
+            tempGender = setTextLength(tempGender,20);
+            String Result = tempID + tempName + tempAge + tempGender ;
             arrayData.add(Result);
             arrayIndex.add(tempIndex);
         }

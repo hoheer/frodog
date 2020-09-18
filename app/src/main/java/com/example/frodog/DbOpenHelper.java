@@ -26,12 +26,12 @@ public class DbOpenHelper {
 
         @Override
         public void onCreate(SQLiteDatabase db){
-                    db.execSQL(PetBD.CreateDB._CREATE0);
+                    db.execSQL(MyPet_DB.CreateDB._CREATE0);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS "+PetBD.CreateDB._TABLENAME0);
+            db.execSQL("DROP TABLE IF EXISTS "+MyPet_DB.CreateDB.MyPet_table);
             onCreate(db);
         }
     }
@@ -55,38 +55,37 @@ public class DbOpenHelper {
     }
 
     // Insert DB
-    public long insertColumn(String userid, String name, String age  ,String gender){
+    public long insertColumn(String userid, String name, String age ,String gender ){
         ContentValues values = new ContentValues();
-        values.put(PetBD.CreateDB.USERID, userid);
-        values.put(PetBD.CreateDB.NAME, name);
-        values.put(PetBD.CreateDB.AGE, age);
-        values.put(PetBD.CreateDB.GENDER, gender);
-
-        return mDB.insert(PetBD.CreateDB._TABLENAME0, null, values);
+        values.put(MyPet_DB.CreateDB.USERID, userid);
+        values.put(MyPet_DB.CreateDB.NAME, name);
+        values.put(MyPet_DB.CreateDB.AGE, age);
+        values.put(MyPet_DB.CreateDB.GENDER, gender);
+        return mDB.insert(MyPet_DB.CreateDB.MyPet_table, null, values);
     }
 
     // Update DB
-    public boolean updateColumn(long id, String userid, String name ,String age , String gender){
+    public boolean updateColumn(long id, String userid, String name ,String age, String gender){
         ContentValues values = new ContentValues();
-        values.put(PetBD.CreateDB.USERID, userid);
-        values.put(PetBD.CreateDB.NAME, name);
-        values.put(PetBD.CreateDB.AGE, age);
-        values.put(PetBD.CreateDB.GENDER, gender);
-        return mDB.update(PetBD.CreateDB._TABLENAME0, values, "_id=" + id, null) > 0;
+        values.put(MyPet_DB.CreateDB.USERID, userid);
+        values.put(MyPet_DB.CreateDB.NAME, name);
+        values.put(MyPet_DB.CreateDB.AGE, age);
+        values.put(MyPet_DB.CreateDB.GENDER, gender);
+        return mDB.update(MyPet_DB.CreateDB.MyPet_table, values, "_id=" + id, null) > 0;
     }
 
     // Delete All
     public void deleteAllColumns() {
-        mDB.delete(PetBD.CreateDB._TABLENAME0, null, null);
+        mDB.delete(MyPet_DB.CreateDB.MyPet_table, null, null);
     }
 
     // Delete DB
     public boolean deleteColumn(long id){
-        return mDB.delete(PetBD.CreateDB._TABLENAME0, "_id="+id, null) > 0;
+        return mDB.delete(MyPet_DB.CreateDB.MyPet_table, "_id="+id, null) > 0;
     }
     // Select DB
     public Cursor selectColumns(){
-        return mDB.query(PetBD.CreateDB._TABLENAME0, null,null, null, null, null, null, null);
+        return mDB.query(MyPet_DB.CreateDB.MyPet_table, null,null, null, null, null, null, null);
     }
 
     // sort by column

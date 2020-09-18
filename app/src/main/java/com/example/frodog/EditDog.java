@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
@@ -21,14 +23,18 @@ public class EditDog extends AppCompatActivity implements View.OnClickListener {
     private Button edit;
     private DbOpenHelper mDbOpenHelper;
     private String ID,name,kind1;
+    ImageView profile_image;
     String gender=" ";
     int position;
     Long nowIndex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_dog);
 
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("수정 하기");
         edit=findViewById(R.id.Edit_Button);
         birtday=findViewById(R.id.Dog_Birthday_Text_1);
         pet_name=findViewById(R.id.Pet_name_1);
@@ -119,6 +125,7 @@ public class EditDog extends AppCompatActivity implements View.OnClickListener {
                 name=kind.getText().toString();
                 kind1=birtday.getText().toString();
                 //  kind1=kind.getSelectedItem().toString();
+
                 mDbOpenHelper.updateColumn(nowIndex,ID,name,kind1,gender);
                 pet_name.requestFocus();
                 pet_name.setCursorVisible(true);

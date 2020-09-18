@@ -115,9 +115,10 @@
     <Button
         android:id="@+id/Save_Button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:layout_alignParentBottom="true"
-        android:text="저장하기"
+        android:background="@drawable/mypet_save"
+
         android:layout_centerHorizontal="true"/>
 
 

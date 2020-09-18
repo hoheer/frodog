@@ -25,13 +25,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Pro extends Activity implements View.OnClickListener {
+public class Pro extends AppCompatActivity implements View.OnClickListener {
     ImageView profile_image;
     String Nickname;
     String Email;
@@ -60,7 +62,8 @@ public class Pro extends Activity implements View.OnClickListener {
     String kind;
     String gender = "";
     String sort = "userid";
-    String uri;
+    String image;
+    String Profile;
     ArrayAdapter<String> arrayAdapter;
 
     static ArrayList<String> arrayIndex =  new ArrayList<String>();
@@ -71,6 +74,11 @@ public class Pro extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro);
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("나의 반려 동물 등록");
+
+
         Intent intent = getIntent();
        // TextView nickname = findViewById(R.id.Sign_Nickname);
         // Nickname =intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
@@ -544,12 +552,12 @@ public class Pro extends Activity implements View.OnClickListener {
                 ID=pet_name.getText().toString();
                 name=kind_of_dog.getText().toString();
                 kind=editText.getText().toString();
-               //kind=profile_image.toString();
+               // Profile=profile_image.toString();
 
-               // gender=pet_name.getText().toString();
+
                 mDbOpenHelper.open();
-              // mDbOpenHelper.insertColumn(ID, name, kind,gender);
-               mDbOpenHelper.deleteAllColumns();
+              mDbOpenHelper.insertColumn(ID, name, kind,gender);
+               //mDbOpenHelper.deleteAllColumns();
               //  showDatabase(sort);
                // setInsertMode();
                 pet_name.requestFocus();
