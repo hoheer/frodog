@@ -7,55 +7,52 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout
-        android:id="@+id/L3"
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/dog_text"
         android:layout_width="match_parent"
-        android:layout_height="267dp"
-        android:layout_below="@+id/L2"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="나의 반려견"
+        android:textSize="25dp" />
 
-        <Button
-            android:id="@+id/Button_Calender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calender " />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/L1"
-        android:layout_width="match_parent"
-        android:layout_height="239dp"
-        android:orientation="vertical">
-
-
-        <Button
-            android:id="@+id/Button_Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile" />
 
         <ImageView
-            android:id="@+id/test1"
-            android:layout_width="210dp"
-            android:layout_height="100dp"
-           />
+            android:src="@color/background"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/profile_iamge3"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_below="@+id/dog_text"
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/L2"
+            />
+    <Button
+        android:layout_below="@+id/profile_iamge3"
+        android:id="@+id/Button_Profile"
         android:layout_width="match_parent"
-        android:layout_height="261dp"
-        android:layout_below="@+id/L1"
-        android:orientation="vertical">
+        android:layout_height="80dp"
+        android:background="@drawable/main_mypage"
+        android:layout_marginTop="15dp"
+        android:text="Profile" />
+
+
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Miss" />
-    </LinearLayout>
+            android:layout_below="@+id/Button_Profile"
+            android:id="@+id/Button_Calender"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/main_calender"
+            android:text="Calender " />
+    <Button
+        android:background="@drawable/main_walking"
+        android:layout_below="@+id/Button_Calender"
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="1dp"
+        android:text="Miss" />
+
 
 
 </RelativeLayout>

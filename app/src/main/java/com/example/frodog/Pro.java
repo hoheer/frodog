@@ -1,16 +1,13 @@
 package com.example.frodog;
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -21,20 +18,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Pro extends AppCompatActivity implements View.OnClickListener {
-    ImageView profile_image;
+   // ImageView profile_image;
     String Nickname;
     String Email;
     DatePickerDialog datePicker;
@@ -197,7 +190,7 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
 
  */
         //프로필 사진
-
+/*
         profile_image=findViewById(R.id.Dog_image);
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +202,8 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
         });
 
 
+
+ */
 
 /*
         //지도로 넘어가는 버튼
@@ -418,6 +413,7 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
         }
         return text;
     }
+    /*
 //file 생성
     @RequiresApi(api = Build.VERSION_CODES.N)
     private  File createImageFile() throws IOException{
@@ -433,7 +429,6 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
 
         return  imagefile;
     }
-
 //앨범에서 불러오기
     private void getAlbum() {
         Intent getintent = new Intent(Intent.ACTION_PICK);
@@ -501,7 +496,11 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
         }
 
 
+
+
     }
+
+ */
     /*
     private void checkPermission() {
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){

@@ -4,30 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditDog">
+    tools:context=".Pro">
 
 
-    <ImageView
-        android:id="@+id/Dog_image"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_below="@+id/Pet_name_1"
-        />
+
 
     <TextView
+        android:layout_marginTop="50dp"
         android:id="@+id/Sign_Nicname_Textview_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Dog_check_1"
-        android:text="이름:"
-        android:textSize="20sp" />
+        android:text="이름"
+        android:textSize="25sp" />
 
     <EditText
         android:id="@+id/Pet_name_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext_background"
         android:layout_below="@+id/Sign_Nicname_Textview_1"
         android:textSize="20sp">
 
@@ -37,11 +31,13 @@
 
 
     <TextView
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/Pet_name_1"
         android:id="@+id/Sign_Sex_Textview_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="성별"
-        android:textSize="20sp"
+        android:textSize="25sp"
         tools:ignore="MissingConstraints" />
 
     <CheckBox
@@ -74,11 +70,12 @@
 
 
     <TextView
+        android:layout_marginTop="30dp"
         android:id="@+id/Dog_birthday_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="강아지의 생일"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_below="@+id/nothing_1"
 
         />
@@ -87,13 +84,15 @@
     <EditText
         android:id="@+id/Dog_Birthday_Text_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/Dog_birthday_1"
         android:layout_centerInParent="true"
+        android:background="@drawable/edittext_background"
         android:ems="10"
         android:hint="생년월일을 입력하십시오"/>
 
     <TextView
+        android:layout_marginTop="30dp"
         android:id="@+id/Kindofdog_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,22 +101,25 @@
         android:layout_below="@+id/Dog_Birthday_Text_1"
         android:layout_centerVertical="true"
         />
-
     <EditText
         android:id="@+id/Dog_check_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/Kindofdog_1"
+        android:background="@drawable/edittext_background"
+
 
         />
+
 
 
     <Button
         android:id="@+id/Edit_Button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:text="수정하기"
+        android:background="@drawable/mypet_save"
+
         android:layout_centerHorizontal="true"/>
 
 
