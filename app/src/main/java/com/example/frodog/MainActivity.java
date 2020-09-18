@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private String mCurrentPhotoPath;
     private  Uri PhotoURI, albumURI;
 
-
+//backup_file
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
