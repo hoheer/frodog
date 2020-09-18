@@ -17,8 +17,9 @@
 
 
         <ImageView
+
             android:src="@color/background"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/profile_iamge3"
             android:layout_width="280dp"
@@ -27,12 +28,13 @@
 
             />
     <Button
+        android:layout_marginTop="100dp"
         android:layout_below="@+id/profile_iamge3"
         android:id="@+id/Button_Profile"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/main_mypage"
-        android:layout_marginTop="15dp"
+       android:layout_centerHorizontal="true"
         android:text="Profile" />
 
 

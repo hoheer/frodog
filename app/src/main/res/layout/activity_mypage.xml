@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Profile_Image1"
-            android:layout_marginLeft="111dp"
+            android:layout_marginLeft="124dp"
             android:layout_marginTop="10dp"
             android:text="안녕하세요!"
             android:textSize="20sp" />
@@ -74,12 +74,13 @@
     <RelativeLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="217dp"
+        android:layout_height="268dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/mypet_second_layout_background"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="16dp">
 
         <Button
             android:id="@+id/My_Pet_Page_Button"
@@ -102,20 +103,21 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/my_pet_third_layout_background"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="16dp">
 
         <Button
             android:id="@+id/Button_Sign_Out"
             android:layout_width="146dp"
             android:layout_height="77dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@+id/logout"
 
             android:background="@drawable/mypage_delete" />
@@ -125,7 +127,7 @@
             android:layout_width="146dp"
             android:layout_height="77dp"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/mypage_logout"
 
             />

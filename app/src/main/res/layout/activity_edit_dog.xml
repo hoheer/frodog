@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/mypet_save"
+        android:background="@drawable/edit"
 
         android:layout_centerHorizontal="true"/>
 
