@@ -7,7 +7,7 @@
     tools:context=".Mypage">
 
     <RelativeLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/r1"
         android:layout_width="match_parent"
         android:layout_height="277dp"
         android:orientation="vertical"
@@ -72,13 +72,13 @@
 
 
     <RelativeLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/r2"
         android:layout_width="match_parent"
         android:layout_height="268dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/mypet_second_layout_background"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/r1"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp">
 
@@ -86,7 +86,8 @@
             android:id="@+id/My_Pet_Page_Button"
             android:layout_width="139dp"
             android:layout_height="281dp"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/mypage_mypet" />
 
         <Button
@@ -109,7 +110,7 @@
         android:layout_marginTop="48dp"
         android:background="@drawable/my_pet_third_layout_background"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/r2"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp">
 
@@ -126,7 +127,8 @@
             android:id="@+id/logout"
             android:layout_width="146dp"
             android:layout_height="77dp"
-            android:layout_marginLeft="65dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="3dp"
             android:background="@drawable/mypage_logout"
 

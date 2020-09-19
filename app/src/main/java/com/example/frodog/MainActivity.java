@@ -2,6 +2,7 @@ package com.example.frodog;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,14 +27,17 @@ public class MainActivity extends AppCompatActivity {
     ImageView t1;
     String sProfile;
     String image;
-    private DbOpenHelper mDbOpenHelper;
+    String test33;
+    Uri test44;
+    String test55;
+    Bitmap bm;
 
     private static final int REQUEST_TAKE_ALBUM = 1111;
     private static final int REQUEST_IMAGE_CROP = 2222;
     private String mCurrentPhotoPath;
     private  Uri PhotoURI, albumURI;
 
-//backup_file
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +56,18 @@ public class MainActivity extends AppCompatActivity {
         Nickname = intent.getStringExtra("name"); //카카오 api를 통해 사용자의 이름을 가져옴
         Email = intent.getStringExtra("email"); // 카카오 api를 통해 사용자의 이메일을 가져옴
         sProfile = intent.getStringExtra("profile");
+
+
+
+
+
+
        // mDbOpenHelper = new DbOpenHelper(this);
        // mDbOpenHelper.open();
        // Cursor cursor= mDbOpenHelper.selectColumns();
        //if(cursor != null){
        // image=cursor.getString(4);
      //   Glide.with(this).load(image).into(t1);
-
 
 
 
@@ -90,6 +99,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Calender.class);
+                startActivity(intent);
+            }
+        });
+
+        Button weather =findViewById(R.id.button_weather);
+        weather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this,Weather.class);
                 startActivity(intent);
             }
         });
@@ -193,7 +211,9 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_IMAGE_CROP:
                 if (resultCode == Activity.RESULT_OK){
                     galleyAddPic();
+
                     t1.setImageURI(PhotoURI);
+
                 }
                 break;
 

@@ -154,7 +154,7 @@ public class Check extends AppCompatActivity {
             tempAge = setTextLength(tempAge,20);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
             tempGender = setTextLength(tempGender,20);
-            String Result = tempID + tempName + tempAge + tempGender ;
+            String Result = tempID +"\n"+ tempName + "\n"+tempAge +"\n"+ tempGender ;
             arrayData.add(Result);
             arrayIndex.add(tempIndex);
         }

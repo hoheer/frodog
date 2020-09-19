@@ -10,15 +10,16 @@
     <TextView
         android:layout_marginTop="20dp"
         android:id="@+id/dog_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="나의 반려견"
+        android:layout_centerHorizontal="true"
         android:textSize="25dp" />
 
 
         <ImageView
 
-            android:src="@color/background"
+            android:src="@drawable/main_plus"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/profile_iamge3"
@@ -49,7 +50,7 @@
     <Button
         android:background="@drawable/main_walking"
         android:layout_below="@+id/Button_Calender"
-        android:id="@+id/button"
+        android:id="@+id/button_weather"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginBottom="1dp"
