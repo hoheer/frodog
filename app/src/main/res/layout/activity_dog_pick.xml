@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dog_pick">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q1. 반려견과 생활하게 될 주거유형은 무엇인가요?"
+            android:textSize="25dp"
+            android:id="@+id/question_1"
+            />
+        <RadioGroup
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/question_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_1_button"
+            android:orientation="horizontal"
+
+            >
+            <RadioButton
+                android:id="@+id/answer_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다가구주택"
+                android:layout_marginLeft="20dp"
+                />
+            <RadioButton
+                android:id="@+id/answer_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="단독주택"
+                android:layout_marginLeft="20dp"
+                />
+        </RadioGroup>
+
+        2번
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q2. 쉬는날에 주로 어디서 시간을 보내시나요?"
+            android:textSize="25dp"
+            android:id="@+id/question_2"
+            android:layout_below="@+id/question_1_button"
+            android:layout_marginTop="20dp"
+            />
+        <RadioGroup
+            android:layout_below="@+id/question_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_2_button"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <RadioButton
+                android:id="@+id/answer_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주로 집"
+                android:layout_marginLeft="20dp"
+                />
+            <RadioButton
+                android:id="@+id/answer_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주로 밖"
+                android:layout_marginLeft="20dp"
+                />
+        </RadioGroup>
+3번
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q3. 평소 운동을 자주 하시나요?"
+            android:textSize="25dp"
+            android:id="@+id/question_3"
+            android:layout_below="@+id/question_2_button"
+            android:layout_marginTop="20dp"
+            />
+        <RadioGroup
+            android:layout_below="@+id/question_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_3_button"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <RadioButton
+                android:id="@+id/answer_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="거의 매일"
+                android:layout_marginLeft="20dp"
+                />
+            <RadioButton
+                android:id="@+id/answer_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="거의 안함"
+                android:layout_marginLeft="20dp"
+                />
+        </RadioGroup>
+
+        4번
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q4. 강아지 털빠짐에 예민한 편가요?"
+            android:textSize="25dp"
+            android:id="@+id/question_4"
+            android:layout_below="@+id/question_3_button"
+            android:layout_marginTop="20dp"
+            />
+        <RadioGroup
+            android:layout_below="@+id/question_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_4_button"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <RadioButton
+                android:id="@+id/answer_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예민한 편"
+                android:layout_marginLeft="20dp"
+                />
+            <RadioButton
+                android:id="@+id/answer_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="괜찮은 편"
+                android:layout_marginLeft="20dp"
+                />
+        </RadioGroup>
+
+        5번
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q5. 내 이웃의 소음 불만에 잘 대처할 수 있나요?"
+            android:textSize="25dp"
+            android:id="@+id/question_5"
+            android:layout_below="@+id/question_4_button"
+            android:layout_marginTop="20dp"
+
+            />
+        <RadioGroup
+            android:layout_below="@+id/question_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_5_button"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <RadioButton
+                android:id="@+id/answer_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="문제 없음"
+                android:layout_marginLeft="20dp"
+                />
+            <RadioButton
+                android:id="@+id/answer_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다소 어려움"
+                android:layout_marginLeft="20dp"
+                />
+        </RadioGroup>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/pick_save"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/mypet_save"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

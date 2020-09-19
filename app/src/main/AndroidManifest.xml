@@ -27,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Weather"></activity>
+        <activity android:name=".Dog_pick"></activity>
+        <activity android:name=".Weather" />
         <activity android:name=".EditDog" />
         <activity android:name=".Mypage" />
         <activity android:name=".Calender" />

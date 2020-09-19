@@ -63,7 +63,7 @@ public class Mypage extends AppCompatActivity {
         choice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Mypage.this,Pro.class);
+                Intent intent =new Intent(Mypage.this,Dog_pick.class);
                 startActivity(intent);
 
             }
