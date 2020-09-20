@@ -11,7 +11,7 @@ public class MemoDBHelper extends SQLiteOpenHelper
     private static MemoDBHelper sInstance; // 싱글턴 인스턴스 선언
 
     private static final int DB_VERSION=1;
-    private static final String  DB_NAME="Memo.db";
+    private static final String  DB_NAME="Calender.db";
     private static final String SQL_CREATE_ENTRIES =
             String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT ,%s CHAR[10], %s TEXT, %s TEXT)",
                     MemoContract.MemoEntry.TABLE_NAME,

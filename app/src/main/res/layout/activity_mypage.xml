@@ -19,7 +19,6 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp" />
-        이미지 -카카오톡
 
         <TextView
             android:id="@+id/Sign_Nicname_Textview"
@@ -65,8 +64,7 @@
             android:text="...."
             android:textSize="20dp" />
 
-        텍스트뷰 -카카오톡 이름
-        이메일 -카카오톡 주소
+
 
     </RelativeLayout>
 
@@ -97,8 +95,7 @@
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@+id/My_Pet_Page_Button"
             android:background="@drawable/mypage_recommend" />
-        나의 반려동물 -버튼
-        반려동물 추천 -버튼
+
 
 
     </RelativeLayout>
@@ -134,8 +131,7 @@
 
             />
 
-        회원탈퇴 -버튼
-        로그아웃 -버튼
+
     </RelativeLayout>
 
 

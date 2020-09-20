@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 
 public class Check extends AppCompatActivity {
     String sort ="userid";
-    EditText pet_name;
     long nowIndex;
     ArrayAdapter<String> arrayAdapter;
     Button save ;
@@ -35,9 +33,12 @@ public class Check extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
+        //상단바 설정
         ActionBar actionBar=getSupportActionBar();
         actionBar.setTitle("나의 반려 동물");
 
+
+//리스트뷰에 보여지는 작업들
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView =findViewById(R.id.db_list_view_1);
         listView.setAdapter(arrayAdapter);
@@ -48,29 +49,9 @@ public class Check extends AppCompatActivity {
         mDbOpenHelper.open();
         mDbOpenHelper.create();
         showDatabase(sort);
-/*
-        TextView UserName = findViewById(R.id.User_Name);
-        TextView UserEmail = findViewById(R.id.User_Email);
-        TextView Dogkind = findViewById(R.id.Dog_Kind);
-        TextView Dogbir = findViewById(R.id.Dog_birthday);
-        TextView Dogsex = findViewById(R.id.Dog_sex_check);
-        Intent intent = getIntent();
-
-        String name = intent.getExtras().getString("name");
-        String email = intent.getExtras().getString("Email");
-        String birthday = intent.getExtras().getString("birthday");
-        String kind = intent.getExtras().getString("kind");
-        String sex = intent.getExtras().getString("sex");
 
 
-        UserName.setText(name);
-        UserEmail.setText(email);
-        Dogkind.setText(kind);
-        Dogbir.setText(birthday);
-        Dogsex.setText(sex);
-
-
- */
+        //강아지 등록 하기 버튼
     save.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -81,6 +62,8 @@ public class Check extends AppCompatActivity {
     });
 
     }
+
+    //리스트 item 클릭시 일어나는 행동 -> 수정하기(Edit_Dog)로 넘어가기 설정
     private AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,23 +74,19 @@ public class Check extends AppCompatActivity {
             Log.e("On Click", "Data: " + arrayData.get(position));
             String[] tempData = arrayData.get(position).split("\\s+");
             Log.e("On Click", "Split Result = " + tempData);
-
-
-
-
         Intent intent =new Intent(Check.this,EditDog.class);
 
-        intent.putExtra("name",tempData[0].trim());
-        intent.putExtra("p2",tempData[1].trim());
-        intent.putExtra("p3",tempData[2].trim());
-        intent.putExtra("p4",tempData[3].trim());
-//        intent.putExtra("p5",tempData[4].trim());
+        intent.putExtra("name",tempData[1].trim());
+        intent.putExtra("kind",tempData[3].trim());
+        intent.putExtra("birthday",tempData[5].trim());
+        intent.putExtra("gender",tempData[7].trim());
         intent.putExtra("nowindex",nowIndex);
-            //intent.putExtra("position",position);
         startActivity(intent);
         finish();
         }
     };
+
+    //길게 클릭시 해당 item을 삭제
     private AdapterView.OnItemLongClickListener longClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -124,14 +103,12 @@ public class Check extends AppCompatActivity {
                             Toast.makeText(Check.this, "데이터를 삭제했습니다.", Toast.LENGTH_SHORT).show();
                             mDbOpenHelper.deleteColumn(nowIndex);
                             showDatabase(sort);
-                            //setInsertMode();
                         }
                     })
                     .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(Check.this, "삭제를 취소했습니다.", Toast.LENGTH_SHORT).show();
-                           // setInsertMode();
                         }
                     })
                     .create()
@@ -139,9 +116,11 @@ public class Check extends AppCompatActivity {
             return false;
         }
     };
+
+
+    //리스트뷰에 데이터베이스에 존재하는 값들을 입력후 보여줌
     public void showDatabase(String sort){
         Cursor iCursor = mDbOpenHelper.sortColumn(sort);
-      //  Log.d("showDatabase", "DB Size: " + iCursor.getCount());
         arrayData.clear();
         arrayIndex.clear();
         while(iCursor.moveToNext()){
@@ -172,12 +151,5 @@ public class Check extends AppCompatActivity {
         }
         return text;
     }
-
-
-
-
-
-
-
 
 }
