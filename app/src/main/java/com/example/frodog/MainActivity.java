@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     String test55;
     Bitmap bm;
 
+
+
+
+
     private static final int REQUEST_TAKE_ALBUM = 1111;
     private static final int REQUEST_IMAGE_CROP = 2222;
     private String mCurrentPhotoPath;
@@ -60,13 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-       // mDbOpenHelper = new DbOpenHelper(this);
-       // mDbOpenHelper.open();
-       // Cursor cursor= mDbOpenHelper.selectColumns();
-       //if(cursor != null){
-       // image=cursor.getString(4);
      //   Glide.with(this).load(image).into(t1);
 
 
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Uri curi=Uri.fromFile(f);
         m.setData(curi);
         sendBroadcast(m);
-        Toast.makeText(this, "앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show();;
+        Toast.makeText(this, "앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show();
     }
     // crop화
     public  void cropImage(){
@@ -153,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
         c.setDataAndType(PhotoURI,"image/*");
         c.putExtra("aspectX",1);
         c.putExtra("aspectY",1);
-        c.putExtra("outputX",1000);
-        c.putExtra("outputY",1000);
+        c.putExtra("outputX",1200);
+        c.putExtra("outputY",1200);
         c.putExtra("scale",true);
         c.putExtra("output",albumURI);
         startActivityForResult(c,REQUEST_IMAGE_CROP);
@@ -189,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_IMAGE_CROP:
                 if (resultCode == Activity.RESULT_OK){
                     galleyAddPic();
-
                     t1.setImageURI(PhotoURI);
 
                 }
