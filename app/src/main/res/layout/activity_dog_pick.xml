@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Q1. 반려견과 생활하게 될 주거유형은 무엇인가요?"
+            android:textColor="#000000"
             android:textSize="25dp"
             android:id="@+id/question_1"
             />
@@ -31,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="다가구주택"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
             <RadioButton
@@ -38,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="단독주택"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
         </RadioGroup>
@@ -49,6 +52,7 @@
             android:layout_height="wrap_content"
             android:text="Q2. 쉬는날에 주로 어디서 시간을 보내시나요?"
             android:textSize="25dp"
+            android:textColor="#000000"
             android:id="@+id/question_2"
             android:layout_below="@+id/question_1_button"
             android:layout_marginTop="20dp"
@@ -66,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="주로 집"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
             <RadioButton
@@ -73,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="주로 밖"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
         </RadioGroup>
@@ -82,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Q3. 평소 운동을 자주 하시나요?"
             android:textSize="25dp"
+            android:textColor="#000000"
             android:id="@+id/question_3"
             android:layout_below="@+id/question_2_button"
             android:layout_marginTop="20dp"
@@ -99,6 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="거의 매일"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
             <RadioButton
@@ -106,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="거의 안함"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
         </RadioGroup>
@@ -116,6 +125,7 @@
             android:layout_height="wrap_content"
             android:text="Q4. 강아지 털빠짐에 예민한 편가요?"
             android:textSize="25dp"
+            android:textColor="#000000"
             android:id="@+id/question_4"
             android:layout_below="@+id/question_3_button"
             android:layout_marginTop="20dp"
@@ -133,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="예민한 편"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
             <RadioButton
@@ -140,6 +151,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="괜찮은 편"
+
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
         </RadioGroup>
@@ -150,6 +163,7 @@
             android:layout_height="wrap_content"
             android:text="Q5. 내 이웃의 소음 불만에 잘 대처할 수 있나요?"
             android:textSize="25dp"
+            android:textColor="#000000"
             android:id="@+id/question_5"
             android:layout_below="@+id/question_4_button"
             android:layout_marginTop="20dp"
@@ -168,6 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="문제 없음"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
             <RadioButton
@@ -175,6 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="다소 어려움"
+                android:textSize="20dp"
                 android:layout_marginLeft="20dp"
                 />
         </RadioGroup>

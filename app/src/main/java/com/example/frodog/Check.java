@@ -141,7 +141,7 @@ public class Check extends AppCompatActivity {
     };
     public void showDatabase(String sort){
         Cursor iCursor = mDbOpenHelper.sortColumn(sort);
-        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+      //  Log.d("showDatabase", "DB Size: " + iCursor.getCount());
         arrayData.clear();
         arrayIndex.clear();
         while(iCursor.moveToNext()){
@@ -150,11 +150,11 @@ public class Check extends AppCompatActivity {
             tempID = setTextLength(tempID,20);
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
             tempName = setTextLength(tempName,20);
-            String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
-            tempAge = setTextLength(tempAge,20);
+            String tempKind = iCursor.getString(iCursor.getColumnIndex("kind"));
+            tempKind = setTextLength(tempKind,20);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
             tempGender = setTextLength(tempGender,20);
-            String Result = tempID +"\n"+ tempName + "\n"+tempAge +"\n"+ tempGender ;
+            String Result ="이름 " + tempID +"\n" +"품종 " + tempName  +"\n"+"생일 " +tempKind  +"\n"+ "성별 "+tempGender ;
             arrayData.add(Result);
             arrayIndex.add(tempIndex);
         }

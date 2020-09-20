@@ -390,12 +390,12 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
             tempID = setTextLength(tempID,10);
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
             tempName = setTextLength(tempName,10);
-            String tempAge = iCursor.getString(iCursor.getColumnIndex("age"));
-            tempAge = setTextLength(tempAge,10);
+            String tempKind = iCursor.getString(iCursor.getColumnIndex("kind"));
+            tempKind = setTextLength(tempKind,10);
             String tempGender = iCursor.getString(iCursor.getColumnIndex("gender"));
             tempGender = setTextLength(tempGender,10);
 
-            String Result = tempID + tempName + tempAge + tempGender;
+            String Result = tempID + tempName + tempKind + tempGender;
             arrayData.add(Result);
             arrayIndex.add(tempIndex);
         }
@@ -551,12 +551,12 @@ public class Pro extends AppCompatActivity implements View.OnClickListener {
                 ID=pet_name.getText().toString();
                 name=kind_of_dog.getText().toString();
                 kind=editText.getText().toString();
-               // Profile=profile_image.toString();
+
 
 
                 mDbOpenHelper.open();
               mDbOpenHelper.insertColumn(ID, name, kind,gender);
-               //mDbOpenHelper.deleteAllColumns();
+              // mDbOpenHelper.deleteAllColumns();
               //  showDatabase(sort);
                // setInsertMode();
                 pet_name.requestFocus();
