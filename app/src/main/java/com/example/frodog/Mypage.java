@@ -94,7 +94,7 @@ public class Mypage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(Mypage.this)
-                        .setMessage("탈퇴하시겠습니까")
+                        .setMessage("탈퇴하시겠습니까?")
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

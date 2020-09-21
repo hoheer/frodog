@@ -99,12 +99,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+//외출 이동 버튼
         Button weather =findViewById(R.id.button_weather);
         weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,Weather.class);
+                Intent intent= new Intent(MainActivity.this, dogWeather.class);
                 startActivity(intent);
             }
         });
