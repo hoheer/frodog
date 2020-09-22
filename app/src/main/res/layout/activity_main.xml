@@ -29,6 +29,7 @@
 
             />
     <Button
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="100dp"
         android:layout_below="@+id/profile_iamge3"
         android:id="@+id/Button_Profile"
@@ -36,25 +37,29 @@
         android:layout_height="80dp"
         android:background="@drawable/main_mypage"
        android:layout_centerHorizontal="true"
-        android:text="Profile" />
+         />
 
 
 
         <Button
+            android:layout_marginLeft="50dp"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/Button_Profile"
             android:id="@+id/Button_Calender"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@drawable/main_calender"
-            android:text="Calender " />
+              />
     <Button
+        android:layout_marginLeft="50dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/main_walking"
         android:layout_below="@+id/Button_Calender"
         android:id="@+id/button_weather"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginBottom="1dp"
-        android:text="Miss" />
+         />
 
 
 

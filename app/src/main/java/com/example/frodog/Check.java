@@ -95,8 +95,8 @@ public class Check extends AppCompatActivity {
             String[] nowData = arrayData.get(position).split("\\s+");
             String viewData = nowData[0] + ", " + nowData[1] + ", " + nowData[2] + ", " + nowData[3] ;
             AlertDialog.Builder dialog = new AlertDialog.Builder(Check.this);
-            dialog.setTitle("데이터 삭제")
-                    .setMessage("해당 데이터를 삭제 하시겠습니까?" + "\n" + viewData)
+            dialog.setTitle("반려견 정보 삭제")
+                    .setMessage("해당 반려견을 삭제 하시겠습니까?" + "\n" )
                     .setPositiveButton("네", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
