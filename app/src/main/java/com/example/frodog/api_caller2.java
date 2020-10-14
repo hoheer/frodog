@@ -64,11 +64,7 @@ public class api_caller2 extends AsyncTask<Void,Void, String> {
 
                     Element eElement = (Element) nNode;
 
-                     result2 +=getTagValue("category", eElement)+" "+getTagValue("fcstValue", eElement)+" ";
-
-
-
-                    // Log.d("OPEN_API", "rs  : " +result2 );
+                    result2 +=getTagValue("category", eElement)+" "+getTagValue("fcstValue", eElement)+" ";
 
                 }    // for end
             }

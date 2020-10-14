@@ -61,10 +61,10 @@ public class api_caller extends AsyncTask<Void,Void, String> {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element eElement = (Element) nNode;
-                     //Log.d("OPEN_API", "data Time  : " + getTagValue("dataTime", eElement));
+                    //Log.d("OPEN_API", "data Time  : " + getTagValue("dataTime", eElement));
                     // Log.d("OPEN_API", "미세먼지  : " + getTagValue("pm10Value", eElement));
                     // Log.d("OPEN_API", "초미세먼지 : " + getTagValue("pm25Value", eElement));
-                     result = getTagValue("pm25Value", eElement) + getTagValue("pm10Value", eElement);
+                    result = getTagValue("pm25Value", eElement) + getTagValue("pm10Value", eElement);
                 }    // for end
             }
         }// if end
