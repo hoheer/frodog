@@ -4,29 +4,29 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.media.MediaSession2;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
-import com.kakao.auth.Session;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.ApiErrorCode;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
-import com.kakao.usermgmt.response.model.User;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.security.MessageDigest;
 
 @SuppressWarnings("ALL")
 public class Login extends AppCompatActivity {
-            //업데이트 확인용 주석  -sy
+
     private void getAppKeyHash() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity {
             Log.e("name not found", e.toString());
         }
     }
+
     private SessionCallback sessionCallback;
 
     @Override
@@ -52,6 +53,11 @@ public class Login extends AppCompatActivity {
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen();
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.hide();
+
+
     }
 
     @Override
@@ -97,7 +103,7 @@ public class Login extends AppCompatActivity {
                 public void onSuccess(MeV2Response result) {
                     Intent intent =new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("name",result.getNickname());
-                   // intent.putExtra("profile",result.getProfileImagePath());
+                    intent.putExtra("profile",result.getProfileImagePath());
                     String needScopeAutority ="";
                     if (result.getKakaoAccount().needsScopeAccountEmail()){
                         needScopeAutority =needScopeAutority +"이메일";

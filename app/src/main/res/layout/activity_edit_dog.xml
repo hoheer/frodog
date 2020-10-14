@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pro">
+
+
+
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/Sign_Nicname_Textview_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이름"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/Pet_name_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext_background"
+        android:layout_below="@+id/Sign_Nicname_Textview_1"
+        android:textSize="20sp">
+
+    </EditText>
+
+
+
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/Pet_name_1"
+        android:id="@+id/Sign_Sex_Textview_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성별"
+        android:textSize="25sp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/boy_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Sign_Sex_Textview_1"
+        android:layout_marginTop="0dp"
+        android:text="수컷"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="암컷"
+        android:id="@+id/girl_1"
+        android:layout_below="@+id/Sign_Sex_Textview_1"
+        android:layout_toRightOf="@+id/boy_1"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="중성"
+        android:id="@+id/nothing_1"
+        android:layout_below="@+id/Sign_Sex_Textview_1"
+        android:layout_toRightOf="@+id/girl_1"
+        />
+
+
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/Dog_birthday_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="강아지의 생일"
+        android:textSize="25dp"
+        android:layout_below="@+id/nothing_1"
+
+        />
+
+
+    <EditText
+        android:id="@+id/Dog_Birthday_Text_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/Dog_birthday_1"
+        android:layout_centerInParent="true"
+        android:background="@drawable/edittext_background"
+        android:ems="10"
+        android:hint="생년월일을 입력하십시오"/>
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/Kindofdog_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="품종"
+        android:textSize="25dp"
+        android:layout_below="@+id/Dog_Birthday_Text_1"
+        android:layout_centerVertical="true"
+        />
+    <EditText
+        android:id="@+id/Dog_check_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/Kindofdog_1"
+        android:background="@drawable/edittext_background"
+
+
+        />
+
+
+
+    <Button
+        android:id="@+id/Edit_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/edit"
+
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+
+
+</RelativeLayout>

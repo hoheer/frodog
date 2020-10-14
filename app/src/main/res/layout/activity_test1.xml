@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".test1">
+
+    <TextView
+        android:id="@+id/test3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textSize="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp" />
+
+    <TextView
+        android:id="@+id/test4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="..."
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/test3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp" />
+
+    <TextView
+        android:id="@+id/test5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="..."
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/test4"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp" />
+
+    <TextView
+        android:id="@+id/test6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="..."
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/test5"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="53dp" />
+
+    <TextView
+        android:id="@+id/test7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="184dp"
+        android:text="..."
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/test6"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="53dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

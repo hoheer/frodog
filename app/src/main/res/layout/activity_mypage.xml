@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mypage">
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/Profile_Image1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp" />
+
+        <TextView
+            android:id="@+id/Sign_Nicname_Textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Profile_Image1"
+            android:layout_marginLeft="124dp"
+            android:layout_marginTop="10dp"
+            android:text="안녕하세요!"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/Sign_Nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Profile_Image1"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/Sign_Nicname_Textview"
+
+            android:text="..."
+            android:textSize="20sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Profile_Image1"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/Sign_Nickname"
+            android:text="님!"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/Sign_Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Sign_Nickname"
+            android:layout_centerHorizontal="true"
+
+            android:text="...."
+            android:textSize="20dp" />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/r2"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/mypet_second_layout_background"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/r1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp">
+
+        <Button
+            android:id="@+id/My_Pet_Page_Button"
+            android:layout_width="139dp"
+            android:layout_height="281dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/mypage_mypet" />
+
+        <Button
+            android:id="@+id/Pet_Choice_Button"
+            android:layout_width="139dp"
+            android:layout_height="281dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/My_Pet_Page_Button"
+            android:background="@drawable/mypage_recommend" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/my_pet_third_layout_background"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/r2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp">
+
+        <Button
+            android:id="@+id/Button_Sign_Out"
+            android:layout_width="146dp"
+            android:layout_height="77dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@+id/logout"
+
+            android:background="@drawable/mypage_delete" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="146dp"
+            android:layout_height="77dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/mypage_logout"
+
+            />
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
